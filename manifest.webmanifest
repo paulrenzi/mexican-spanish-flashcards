@@ -1,0 +1,13 @@
+{
+  "name": "¡Órale! Mexican Spanish Flashcards",
+  "short_name": "¡Órale!",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbf6ee",
+  "theme_color": "#0f6b4f",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

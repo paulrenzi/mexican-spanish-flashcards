@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>¡Órale! Mexican Spanish Flashcards</title>
+  <meta name="description" content="Flashcards for the Mexican Spanish you actually need: everyday phrases, ordering at restaurants, and shopping.">
+  <meta name="theme-color" content="#0f6b4f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="¡Órale!">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>¡Órale!</h1>
+      <span class="sub">Mexican Spanish</span>
+    </div>
+    <div class="modes" role="tablist" aria-label="View">
+      <button class="mode active" data-mode="cards" role="tab" aria-selected="true">Cards</button>
+      <button class="mode" data-mode="list" role="tab" aria-selected="false">List</button>
+    </div>
+  </header>
+
+  <nav class="cats" id="cats" aria-label="Categories"></nav>
+
+  <main id="cardsView">
+    <div class="progress-row">
+      <span id="progressText"></span>
+      <button class="link" id="dirBtn" title="Switch which side you see first">EN → ES</button>
+    </div>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+
+    <div class="stage" id="stage">
+      <div class="card" id="card" tabindex="0" aria-live="polite">
+        <div class="face front">
+          <span class="tag" id="frontTag"></span>
+          <p class="prompt" id="frontText"></p>
+          <span class="hint">Tap to flip</span>
+        </div>
+        <div class="face back">
+          <span class="tag" id="backTag"></span>
+          <p class="es" id="backEs"></p>
+          <p class="pr" id="backPr"></p>
+          <p class="en" id="backEn"></p>
+          <p class="note" id="backNote"></p>
+        </div>
+      </div>
+      <div class="done hidden" id="done">
+        <div class="big">🎉</div>
+        <h2>¡Felicidades!</h2>
+        <p id="doneText"></p>
+        <button class="btn primary" id="doneReset">Start this deck again</button>
+      </div>
+    </div>
+
+    <div class="actions" id="actions">
+      <button class="btn again" id="againBtn" aria-label="Show again later">↺ <span>Again</span></button>
+      <button class="btn speak" id="speakBtn" aria-label="Hear it in Spanish">🔊</button>
+      <button class="btn got" id="gotBtn" aria-label="I know this one">✓ <span>Got it</span></button>
+    </div>
+    <p class="swipe-hint">Swipe right if you know it, left to see it again</p>
+
+    <div class="tools">
+      <button class="link" id="shuffleBtn">🔀 Shuffle</button>
+      <button class="link" id="resetBtn">Reset progress</button>
+    </div>
+  </main>
+
+  <main id="listView" class="hidden">
+    <input type="search" id="search" placeholder="Search in English or Spanish…" autocomplete="off">
+    <ul class="list" id="list"></ul>
+  </main>
+
+  <footer>Tap 🔊 to hear it. Works offline once loaded.</footer>
+
+  <script src="phrases.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

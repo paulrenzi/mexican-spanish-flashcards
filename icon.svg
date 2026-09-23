@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0f6b4f"/>
+  <rect x="96" y="150" width="300" height="220" rx="36" fill="#d63a6f" transform="rotate(-8 246 260)"/>
+  <rect x="116" y="142" width="300" height="220" rx="36" fill="#fbf6ee"/>
+  <text x="266" y="290" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="150" fill="#0f6b4f" text-anchor="middle">¡Ó!</text>
+</svg>
