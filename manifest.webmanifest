@@ -3,7 +3,7 @@
   "short_name": "¡Órale!",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#fbf6ee",
+  "background_color": "#f5f5f2",
   "theme_color": "#0f6b4f",
   "icons": [
     { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" },

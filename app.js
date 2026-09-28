@@ -49,9 +49,16 @@
     $("cats").innerHTML = CATEGORIES
       .map((c) => {
         const n = PHRASES.filter((p) => p.cat === c.id).length;
-        return `<button class="chip${c.id === state.cat ? " active" : ""}" data-cat="${c.id}"><span class="ic">${c.icon}</span>${c.name}<span class="n">${n} phrases</span></button>`;
+        return `<button class="chip${c.id === state.cat ? " active" : ""}" data-cat="${c.id}" aria-label="${c.name}, ${n} phrases"><span class="ic">${c.icon}</span><span class="nm">${c.short || c.name}</span></button>`;
       })
       .join("");
+    const c = catById[state.cat];
+    document.body.dataset.cat = c.id;
+    $("heroIc").textContent = c.icon;
+    $("heroName").textContent = c.name;
+    $("heroSub").textContent = `${c.es} · ${c.topics.length} topics · ${PHRASES.filter(inCat).length} phrases`;
+    const tc = getComputedStyle(document.body).getPropertyValue("--accent").trim();
+    if (tc) document.querySelector('meta[name="theme-color"]').content = tc;
   }
   $("cats").addEventListener("click", (e) => {
     const b = e.target.closest(".chip");
@@ -61,6 +68,7 @@
     renderCats();
     buildDeck(false);
     renderList();
+    scrollTo({ top: 0 });
   });
 
   // ---------- Deck ----------
@@ -194,6 +202,8 @@
   });
 
   // ---------- Phrases view: topic keywords that expand into phrases ----------
+  const ICON_SAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none"/></svg>';
+  const ICON_SHOW = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5"/></svg>';
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const topicOf = (p) => catById[p.cat].topics.find((t) => t.id === p.topic);
   const row = (p, where) => `
@@ -206,8 +216,8 @@
             ${p.note ? `<div class="l-note">${esc(p.note)}</div>` : ""}
           </div>
           <div class="btns">
-            <button data-say="${PHRASES.indexOf(p)}" aria-label="Hear it">🔊</button>
-            <button data-show="${PHRASES.indexOf(p)}" aria-label="Show it big">⤢</button>
+            <button data-say="${PHRASES.indexOf(p)}" aria-label="Hear it">${ICON_SAY}</button>
+            <button data-show="${PHRASES.indexOf(p)}" aria-label="Show it big">${ICON_SHOW}</button>
           </div>
         </li>`;
   const word = (p) => `
@@ -222,9 +232,9 @@
       const say = ps.filter((p) => !p.kind), hear = ps.filter((p) => p.kind === "hear"), words = ps.filter((p) => p.kind === "word");
       return `
       <details class="topic" data-topic="${t.id}"${state.open.has(cat.id + ":" + t.id) ? " open" : ""}>
-        <summary><span class="t-ic">${t.icon}</span><span class="t-name">${esc(t.name)}<span class="t-es">${esc(t.es)}</span></span><span class="t-n">${ps.length}</span></summary>
+        <summary><span class="t-ic">${t.icon}</span><span class="t-name">${esc(t.name)}<span class="t-es">${esc(t.es)}</span></span><span class="t-n">${ps.length}</span><span class="chev" aria-hidden="true"></span></summary>
         ${say.length ? `<h3>You ask</h3><ul class="list">${say.map((p) => row(p)).join("")}</ul>` : ""}
-        ${hear.length ? `<h3>You'll hear</h3><ul class="list">${hear.map((p) => row(p)).join("")}</ul>` : ""}
+        ${hear.length ? `<h3 class="h-hear">You'll hear</h3><ul class="list">${hear.map((p) => row(p)).join("")}</ul>` : ""}
         ${words.length ? `<h3>Words</h3><div class="words">${words.map(word).join("")}</div>` : ""}
       </details>`;
     }).join("");
@@ -233,7 +243,7 @@
   function syncToggleAll() {
     const ds = [...document.querySelectorAll(".topic")];
     $("toggleAll").textContent = ds.length && ds.every((d) => d.open) ? "Close all" : "Open all";
-    $("listCount").textContent = `${ds.length} topics · ${PHRASES.filter(inCat).length} phrases`;
+    $("listCount").textContent = "Tap a topic to open it";
   }
   function saveOpen() {
     state.open = new Set([...state.open].filter((k) => !k.startsWith(state.cat + ":")));

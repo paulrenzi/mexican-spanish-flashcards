@@ -34,7 +34,7 @@ try:
         page.reload()
 
         chips = page.locator(".chip").count()
-        check(chips == 4, f"4 situation tabs (got {chips})")
+        check(chips == 5, f"5 situation tabs (got {chips})")
         check(page.is_visible("#listView") and not page.is_visible("#cardsView"), "opens on Phrases, not flashcards")
         check("active" in page.get_attribute(".chip[data-cat=garden]", "class"), "garden tab is the default")
         opened = page.locator(".topic[open]").count()
@@ -57,6 +57,13 @@ try:
         check(n >= 1, f"search 'cuenta' finds restaurant rows from the garden tab (got {n})")
         page.fill("#search", "")
 
+        page.click(".chip[data-cat=gas]")
+        check(page.locator(".topic").count() == 7, "gas station has 7 topics")
+        check(page.inner_text("#heroName") == "Gas station", "header names the gas station")
+        page.click(".topic[data-topic=fill] summary")
+        check(page.locator(".topic[data-topic=fill] .item.hear").count() >= 5, "gas fill-up has things you'll hear")
+        page.screenshot(path=str(OUT / "3-gas.png"), full_page=True)
+        page.click(".topic[data-topic=fill] summary")
         page.click(".chip[data-cat=food]")
         check(page.locator(".topic").count() == 6, "restaurant has 6 topics")
         page.click(".mode[data-mode=cards]")
@@ -80,7 +87,17 @@ try:
         clipped = page.evaluate("[...document.querySelectorAll('.chip')].filter(c => c.scrollWidth > c.clientWidth || c.getBoundingClientRect().right > innerWidth).length")
         check(clipped == 0, f"all category chips fit at 360px (clipped {clipped})")
         page.screenshot(path=str(OUT / "5-narrow.png"))
+        nav_ok = page.evaluate("(() => { const r = document.getElementById('cats').getBoundingClientRect(); return Math.round(r.bottom) === innerHeight; })()")
+        check(nav_ok, "situation bar is pinned to the bottom")
         check(not errors, f"no JS errors {errors}")
+        dark = b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True,
+                             has_touch=True, color_scheme="dark")
+        dp = dark.new_page()
+        dp.goto(url + ("&" if "?" in url else "?") + "cb=" + str(time.time()))
+        dp.wait_for_selector(".topic")
+        bg = dp.evaluate("getComputedStyle(document.body).backgroundColor")
+        check(bg == "rgb(15, 17, 18)", f"dark mode follows the phone (bg {bg})")
+        dp.screenshot(path=str(OUT / "6-dark.png"))
         b.close()
 finally:
     if server:

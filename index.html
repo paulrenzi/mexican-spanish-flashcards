@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>¡Órale! Mexican Spanish Phrasebook</title>
-  <meta name="description" content="A Mexican Spanish phrasebook by situation: everyday, restaurants, stores and the garden center.">
+  <meta name="description" content="A Mexican Spanish phrasebook by situation: everyday, restaurants, stores, the garden center and the gas station.">
   <meta name="theme-color" content="#0f6b4f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,11 +14,14 @@
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-cat="garden">
   <header class="top">
     <div class="brand">
-      <h1>¡Órale!</h1>
-      <span class="sub">Mexican Spanish</span>
+      <span class="logo" aria-hidden="true">¡Ó!</span>
+      <div>
+        <h1>¡Órale!</h1>
+        <span class="sub">Mexican Spanish</span>
+      </div>
     </div>
     <div class="modes" role="tablist" aria-label="View">
       <button class="mode active" data-mode="list" role="tab" aria-selected="true">Phrases</button>
@@ -26,7 +29,13 @@
     </div>
   </header>
 
-  <nav class="cats" id="cats" aria-label="Categories"></nav>
+  <section class="hero" id="hero" aria-live="polite">
+    <span class="hero-ic" id="heroIc"></span>
+    <div class="hero-txt">
+      <h2 id="heroName"></h2>
+      <p id="heroSub"></p>
+    </div>
+  </section>
 
   <main id="cardsView" class="hidden">
     <div class="progress-row">
@@ -60,31 +69,35 @@
 
     <div class="actions" id="actions">
       <button class="btn again" id="againBtn" aria-label="Show again later">↺ <span>Again</span></button>
-      <button class="btn speak" id="speakBtn" aria-label="Hear it in Spanish">🔊</button>
+      <button class="btn speak" id="speakBtn" aria-label="Hear it in Spanish"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none"/></svg></button>
       <button class="btn got" id="gotBtn" aria-label="I know this one">✓ <span>Got it</span></button>
     </div>
     <p class="swipe-hint">Swipe right if you know it, left to see it again</p>
 
     <div class="tools">
-      <button class="link" id="shuffleBtn">🔀 Shuffle</button>
+      <button class="link" id="shuffleBtn">Shuffle</button>
       <button class="link" id="resetBtn">Reset progress</button>
     </div>
   </main>
 
   <main id="listView">
-    <input type="search" id="search" placeholder="Search every phrase, English or Spanish…" autocomplete="off">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" id="search" placeholder="Search every phrase" autocomplete="off" aria-label="Search every phrase, English or Spanish">
+    </label>
     <div class="list-tools"><span id="listCount"></span><button class="link" id="toggleAll">Open all</button></div>
     <div id="topics"></div>
     <ul class="list hidden" id="list"></ul>
+    <p class="foot">Tap a topic to open it · speaker plays it aloud · expand shows it big for the staff · works offline</p>
   </main>
+
+  <nav class="cats" id="cats" aria-label="Situations"></nav>
 
   <div class="show hidden" id="show" role="dialog" aria-label="Phrase shown large">
     <p class="show-es" id="showEs"></p>
     <p class="show-en" id="showEn"></p>
     <p class="show-hint">Tap anywhere to close</p>
   </div>
-
-  <footer>Tap a topic to open it. 🔊 hear it · ⤢ show it big to the staff. Works offline once loaded.</footer>
 
   <script src="phrases.js"></script>
   <script src="app.js"></script>
