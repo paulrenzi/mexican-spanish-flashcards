@@ -36,6 +36,11 @@ body[data-cat="garden"] { --accent: #16875a; }
 body[data-cat="gas"] { --accent: #d6334a; }
 body[data-cat="pharmacy"] { --accent: #0b8a93; }
 body[data-cat="clean"] { --accent: #c2378a; }
+body[data-cat="repair"] { --accent: #b86a0b; }
+body[data-cat="taxi"] { --accent: #a88400; }
+body[data-cat="police"] { --accent: #2b4c9e; }
+body[data-cat="bank"] { --accent: #66731c; }
+body[data-cat="house"] { --accent: #8a5a44; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -123,36 +128,50 @@ svg { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linej
   z-index: 30;
   width: 100%;
   max-width: 600px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: 0;
-  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
   background: color-mix(in srgb, var(--surface) 86%, transparent);
   backdrop-filter: saturate(180%) blur(18px);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
   border-top: 1px solid var(--line);
 }
+.cats .track {
+  display: flex;
+  gap: 2px;
+  padding: 0 6px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 36px;
+  scrollbar-width: none;
+  --fl: 0px;
+  --fr: 0px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent);
+}
+.cats .track::-webkit-scrollbar { display: none; }
+.cats.more-left .track { --fl: 36px; }
+.cats.more-right .track { --fr: 36px; }
 .chip {
+  flex: 0 0 auto;
+  min-width: 70px;
+  scroll-snap-align: start;
   border: 0;
   background: transparent;
   border-radius: 14px;
   height: 56px;
-  padding: 4px 2px;
+  padding: 4px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3px;
-  min-width: 0;
   color: var(--muted);
-  font-size: .68rem;
+  font-size: .74rem;
   font-weight: 600;
-  letter-spacing: -.01em;
   transition: background-color .2s, color .2s;
 }
 .chip .ic { font-size: 1.35rem; line-height: 1; filter: grayscale(.6); opacity: .75; transition: filter .2s, opacity .2s, transform .2s; }
-.chip .nm { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip .nm { white-space: nowrap; }
 .chip.active { color: var(--accent-ink); background: var(--accent-soft); }
 .chip.active .ic { filter: none; opacity: 1; transform: translateY(-1px) scale(1.08); }
 

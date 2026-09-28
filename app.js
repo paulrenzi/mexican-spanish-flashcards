@@ -46,12 +46,15 @@
 
   // ---------- Categories ----------
   function renderCats() {
-    $("cats").innerHTML = CATEGORIES
+    const track = $("cats").querySelector(".track");
+    const left = track ? track.scrollLeft : 0;
+    $("cats").innerHTML = '<div class="track">' + CATEGORIES
       .map((c) => {
         const n = PHRASES.filter((p) => p.cat === c.id).length;
         return `<button class="chip${c.id === state.cat ? " active" : ""}" data-cat="${c.id}" aria-label="${c.name}, ${n} phrases"><span class="ic">${c.icon}</span><span class="nm">${c.short || c.name}</span></button>`;
       })
-      .join("");
+      .join("") + "</div>";
+    watchTrack($("cats").querySelector(".track"), left);
     const c = catById[state.cat];
     document.body.dataset.cat = c.id;
     $("heroIc").textContent = c.icon;
@@ -60,6 +63,26 @@
     const tc = getComputedStyle(document.body).getPropertyValue("--accent").trim();
     if (tc) document.querySelector('meta[name="theme-color"]').content = tc;
   }
+  // The bar scrolls sideways; fade whichever edge has more tabs past it and keep the active tab in view.
+  function watchTrack(t, left) {
+    t.scrollLeft = left;
+    const a = t.querySelector(".active");
+    if (a) {
+      const pad = 36;
+      if (a.offsetLeft - pad < t.scrollLeft) t.scrollLeft = a.offsetLeft - pad;
+      else if (a.offsetLeft + a.offsetWidth + pad > t.scrollLeft + t.clientWidth) t.scrollLeft = a.offsetLeft + a.offsetWidth + pad - t.clientWidth;
+    }
+    const edges = () => {
+      $("cats").classList.toggle("more-left", t.scrollLeft > 2);
+      $("cats").classList.toggle("more-right", t.scrollLeft + t.clientWidth < t.scrollWidth - 2);
+    };
+    t.addEventListener("scroll", edges, { passive: true });
+    t.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { t.scrollLeft += e.deltaY; e.preventDefault(); }
+    }, { passive: false });
+    edges();
+  }
+  addEventListener("resize", () => { const t = $("cats").querySelector(".track"); if (t) t.dispatchEvent(new Event("scroll")); });
   $("cats").addEventListener("click", (e) => {
     const b = e.target.closest(".chip");
     if (!b) return;
