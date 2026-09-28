@@ -34,6 +34,8 @@ body[data-cat="food"] { --accent: #e0592a; }
 body[data-cat="store"] { --accent: #7c4ddb; }
 body[data-cat="garden"] { --accent: #16875a; }
 body[data-cat="gas"] { --accent: #d6334a; }
+body[data-cat="pharmacy"] { --accent: #0b8a93; }
+body[data-cat="clean"] { --accent: #c2378a; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -122,9 +124,10 @@ svg { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linej
   width: 100%;
   max-width: 600px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
-  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0;
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
   background: color-mix(in srgb, var(--surface) 86%, transparent);
   backdrop-filter: saturate(180%) blur(18px);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
@@ -143,8 +146,9 @@ svg { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linej
   gap: 3px;
   min-width: 0;
   color: var(--muted);
-  font-size: .7rem;
+  font-size: .68rem;
   font-weight: 600;
+  letter-spacing: -.01em;
   transition: background-color .2s, color .2s;
 }
 .chip .ic { font-size: 1.35rem; line-height: 1; filter: grayscale(.6); opacity: .75; transition: filter .2s, opacity .2s, transform .2s; }
