@@ -34,7 +34,7 @@ try:
         page.reload()
 
         chips = page.locator(".chip").count()
-        check(chips == 12, f"12 situation tabs (got {chips})")
+        check(chips == 13, f"13 situation tabs (got {chips})")
         check(page.is_visible("#listView") and not page.is_visible("#cardsView"), "opens on Phrases, not flashcards")
         check("active" in page.get_attribute(".chip[data-cat=garden]", "class"), "garden tab is the default")
         opened = page.locator(".topic[open]").count()
@@ -74,7 +74,7 @@ try:
         check(page.inner_text("#heroName") == "House cleaning", "header names house cleaning")
         check(page.locator(".topic[data-topic=supplies] .word").count() >= 10, "cleaning supplies has word chips")
         page.screenshot(path=str(OUT / "8-clean.png"), full_page=True)
-        for cid, name, ntop in [("repair", "Repairs at home", 7), ("taxi", "Taxi & colectivo", 6), ("police", "Police & traffic stop", 6),
+        for cid, name, ntop in [("doctor", "Doctor & dentist", 9), ("repair", "Repairs at home", 7), ("taxi", "Taxi & colectivo", 6), ("police", "Police & traffic stop", 6),
                                 ("bank", "Bank & money", 7), ("house", "Buying a house", 7)]:
             page.locator(f".chip[data-cat={cid}]").scroll_into_view_if_needed()
             page.click(f".chip[data-cat={cid}]")
@@ -83,6 +83,9 @@ try:
             check(page.locator(".topic .item, .topic .word").count() >= 50, f"{cid} has 50+ phrases")
             vis = page.evaluate(f"(() => {{ const r = document.querySelector('.chip[data-cat={cid}]').getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth; }})()")
             check(vis, f"{cid} tab stays in view after tapping it")
+            if cid == "doctor":
+                page.screenshot(path=str(OUT / "10-doctor.png"), full_page=True)
+                check(page.locator(".topic[data-topic=dentist] .item").count() >= 10, "doctor has dentist phrases")
         page.screenshot(path=str(OUT / "9-house.png"), full_page=True)
         check(page.locator(".topic[data-topic=finish] .item").count() >= 10, "house has finishing-the-house phrases")
         page.locator(".chip[data-cat=food]").scroll_into_view_if_needed()

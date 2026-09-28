@@ -4,7 +4,7 @@ A mobile phrasebook for the Mexican Spanish you actually use: everyday phrases, 
 
 **Live:** https://paulrenzi.github.io/mexican-spanish-flashcards/
 
-- **Phrases** (the default) is organized by situation: Everyday, Restaurant, Store, Garden (vivero), Gas station (gasolinera), Pharmacy (farmacia), House cleaning (limpieza), Repairs at home (reparaciones), Taxi & colectivo, Police & traffic stop, Bank & money, Buying a house (bienes raíces), picked from the bar at the bottom, which scrolls sideways. Each situation is a list of topic keywords (e.g. *Water requirements*, *Light requirements*) that expand into what you ask, what you'll hear back, and single words.
+- **Phrases** (the default) is organized by situation: Everyday, Restaurant, Store, Garden (vivero), Gas station (gasolinera), Pharmacy (farmacia), Doctor & dentist (consultorio), House cleaning (limpieza), Repairs at home (reparaciones), Taxi & colectivo, Police & traffic stop, Bank & money, Buying a house (bienes raíces), picked from the bar at the bottom, which scrolls sideways. Each situation is a list of topic keywords (e.g. *Water requirements*, *Light requirements*) that expand into what you ask, what you'll hear back, and single words.
 - 🔊 reads the phrase aloud with a Mexican Spanish voice when your phone has one. ⤢ shows it full-screen to hand to the staff.
 - Search covers every situation at once.
 - **Practice** is the old flashcard mode for the current situation: tap to flip, swipe right if you know it.

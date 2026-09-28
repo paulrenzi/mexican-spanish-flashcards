@@ -35,6 +35,7 @@ body[data-cat="store"] { --accent: #7c4ddb; }
 body[data-cat="garden"] { --accent: #16875a; }
 body[data-cat="gas"] { --accent: #d6334a; }
 body[data-cat="pharmacy"] { --accent: #0b8a93; }
+body[data-cat="doctor"] { --accent: #b23a48; }
 body[data-cat="clean"] { --accent: #c2378a; }
 body[data-cat="repair"] { --accent: #b86a0b; }
 body[data-cat="taxi"] { --accent: #a88400; }
