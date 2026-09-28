@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>¡Órale! Mexican Spanish Flashcards</title>
-  <meta name="description" content="Flashcards for the Mexican Spanish you actually need: everyday phrases, ordering at restaurants, and shopping.">
+  <title>¡Órale! Mexican Spanish Phrasebook</title>
+  <meta name="description" content="A Mexican Spanish phrasebook by situation: everyday, restaurants, stores and the garden center.">
   <meta name="theme-color" content="#0f6b4f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,14 +21,14 @@
       <span class="sub">Mexican Spanish</span>
     </div>
     <div class="modes" role="tablist" aria-label="View">
-      <button class="mode active" data-mode="cards" role="tab" aria-selected="true">Cards</button>
-      <button class="mode" data-mode="list" role="tab" aria-selected="false">List</button>
+      <button class="mode active" data-mode="list" role="tab" aria-selected="true">Phrases</button>
+      <button class="mode" data-mode="cards" role="tab" aria-selected="false">Practice</button>
     </div>
   </header>
 
   <nav class="cats" id="cats" aria-label="Categories"></nav>
 
-  <main id="cardsView">
+  <main id="cardsView" class="hidden">
     <div class="progress-row">
       <span id="progressText"></span>
       <button class="link" id="dirBtn" title="Switch which side you see first">EN → ES</button>
@@ -71,12 +71,20 @@
     </div>
   </main>
 
-  <main id="listView" class="hidden">
-    <input type="search" id="search" placeholder="Search in English or Spanish…" autocomplete="off">
-    <ul class="list" id="list"></ul>
+  <main id="listView">
+    <input type="search" id="search" placeholder="Search every phrase, English or Spanish…" autocomplete="off">
+    <div class="list-tools"><span id="listCount"></span><button class="link" id="toggleAll">Open all</button></div>
+    <div id="topics"></div>
+    <ul class="list hidden" id="list"></ul>
   </main>
 
-  <footer>Tap 🔊 to hear it. Works offline once loaded.</footer>
+  <div class="show hidden" id="show" role="dialog" aria-label="Phrase shown large">
+    <p class="show-es" id="showEs"></p>
+    <p class="show-en" id="showEn"></p>
+    <p class="show-hint">Tap anywhere to close</p>
+  </div>
+
+  <footer>Tap a topic to open it. 🔊 hear it · ⤢ show it big to the staff. Works offline once loaded.</footer>
 
   <script src="phrases.js"></script>
   <script src="app.js"></script>

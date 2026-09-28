@@ -6,16 +6,17 @@
   };
 
   const state = {
-    cat: store.get("cat", "all"),
+    cat: store.get("cat", "garden"),
     dir: store.get("dir", "en"), // which language is on the front
-    mode: "cards",
+    mode: "list",
+    open: new Set(store.get("open", ["garden:water", "garden:light"])),
     known: new Set(store.get("known", [])),
     deck: [],
     flipped: false,
   };
 
   const catById = Object.fromEntries(CATEGORIES.map((c) => [c.id, c]));
-  const inCat = (p) => state.cat === "all" || p.cat === state.cat;
+  const inCat = (p) => p.cat === state.cat;
   const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
   // ---------- Speech ----------
@@ -45,10 +46,9 @@
 
   // ---------- Categories ----------
   function renderCats() {
-    const all = [{ id: "all", name: "All", icon: "⭐" }, ...CATEGORIES];
-    $("cats").innerHTML = all
+    $("cats").innerHTML = CATEGORIES
       .map((c) => {
-        const n = PHRASES.filter((p) => c.id === "all" || p.cat === c.id).length;
+        const n = PHRASES.filter((p) => p.cat === c.id).length;
         return `<button class="chip${c.id === state.cat ? " active" : ""}" data-cat="${c.id}"><span class="ic">${c.icon}</span>${c.name}<span class="n">${n} phrases</span></button>`;
       })
       .join("");
@@ -95,7 +95,7 @@
     $("card").classList.toggle("hidden", empty);
     $("actions").style.visibility = empty ? "hidden" : "visible";
     if (empty) {
-      const label = state.cat === "all" ? "every phrase" : `all the ${catById[state.cat].name.toLowerCase()} phrases`;
+      const label = `all the ${catById[state.cat].name.toLowerCase()} phrases`;
       $("doneText").textContent = `You've marked ${label} as learned.`;
       return;
     }
@@ -151,7 +151,7 @@
     renderList();
   }
   $("resetBtn").addEventListener("click", () => {
-    const what = state.cat === "all" ? "all categories" : catById[state.cat].name;
+    const what = catById[state.cat].name;
     if (confirm(`Reset learned cards for ${what}?`)) resetCat();
   });
   $("doneReset").addEventListener("click", resetCat);
@@ -193,30 +193,86 @@
     else if (e.key.toLowerCase() === "s") { const p = current(); if (p) speak(p.es); }
   });
 
-  // ---------- List view ----------
+  // ---------- Phrases view: topic keywords that expand into phrases ----------
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  function renderList() {
-    const q = fold($("search").value.trim());
-    const rows = PHRASES.map((p, i) => [p, i]).filter(([p]) =>
-      inCat(p) && (!q || fold(p.es + " " + p.en + " " + (p.note || "")).includes(q)));
-    $("list").innerHTML = rows.length
-      ? rows.map(([p, i]) => `
-        <li class="item${state.known.has(p.es) ? " learned" : ""}">
+  const topicOf = (p) => catById[p.cat].topics.find((t) => t.id === p.topic);
+  const row = (p, where) => `
+        <li class="item${p.kind === "hear" ? " hear" : ""}">
           <div class="txt">
+            ${where ? `<div class="l-where">${catById[p.cat].icon} ${esc(catById[p.cat].name)} · ${esc(topicOf(p).name)}</div>` : ""}
             <div class="l-es">${esc(p.es)}</div>
             <div class="l-pr">${esc(p.pr)}</div>
             <div class="l-en">${esc(p.en)}</div>
             ${p.note ? `<div class="l-note">${esc(p.note)}</div>` : ""}
           </div>
-          <button data-say="${i}" aria-label="Hear it">🔊</button>
-        </li>`).join("")
-      : `<li class="empty">No phrases match “${esc($("search").value)}”.</li>`;
+          <div class="btns">
+            <button data-say="${PHRASES.indexOf(p)}" aria-label="Hear it">🔊</button>
+            <button data-show="${PHRASES.indexOf(p)}" aria-label="Show it big">⤢</button>
+          </div>
+        </li>`;
+  const word = (p) => `
+        <button class="word" data-say="${PHRASES.indexOf(p)}" title="${esc(p.pr)}${p.note ? " · " + esc(p.note) : ""}">
+          <span class="w-es">${esc(p.es)}</span><span class="w-en">${esc(p.en)}</span>
+        </button>`;
+
+  function renderTopics() {
+    const cat = catById[state.cat];
+    $("topics").innerHTML = cat.topics.map((t) => {
+      const ps = PHRASES.filter((p) => p.cat === cat.id && p.topic === t.id);
+      const say = ps.filter((p) => !p.kind), hear = ps.filter((p) => p.kind === "hear"), words = ps.filter((p) => p.kind === "word");
+      return `
+      <details class="topic" data-topic="${t.id}"${state.open.has(cat.id + ":" + t.id) ? " open" : ""}>
+        <summary><span class="t-ic">${t.icon}</span><span class="t-name">${esc(t.name)}<span class="t-es">${esc(t.es)}</span></span><span class="t-n">${ps.length}</span></summary>
+        ${say.length ? `<h3>You ask</h3><ul class="list">${say.map((p) => row(p)).join("")}</ul>` : ""}
+        ${hear.length ? `<h3>You'll hear</h3><ul class="list">${hear.map((p) => row(p)).join("")}</ul>` : ""}
+        ${words.length ? `<h3>Words</h3><div class="words">${words.map(word).join("")}</div>` : ""}
+      </details>`;
+    }).join("");
+    syncToggleAll();
+  }
+  function syncToggleAll() {
+    const ds = [...document.querySelectorAll(".topic")];
+    $("toggleAll").textContent = ds.length && ds.every((d) => d.open) ? "Close all" : "Open all";
+    $("listCount").textContent = `${ds.length} topics · ${PHRASES.filter(inCat).length} phrases`;
+  }
+  function saveOpen() {
+    state.open = new Set([...state.open].filter((k) => !k.startsWith(state.cat + ":")));
+    document.querySelectorAll(".topic[open]").forEach((d) => state.open.add(state.cat + ":" + d.dataset.topic));
+    store.set("open", [...state.open]);
+    syncToggleAll();
+  }
+  $("topics").addEventListener("toggle", saveOpen, true);
+  $("toggleAll").addEventListener("click", () => {
+    const ds = [...document.querySelectorAll(".topic")];
+    const open = !ds.every((d) => d.open);
+    ds.forEach((d) => (d.open = open));
+    saveOpen();
+  });
+
+  function renderList() {
+    const raw = $("search").value.trim(), q = fold(raw);
+    $("topics").classList.toggle("hidden", !!q);
+    $("list").classList.toggle("hidden", !q);
+    $("toggleAll").classList.toggle("hidden", !!q);
+    if (!q) { renderTopics(); return; }
+    const rows = PHRASES.filter((p) => fold(p.es + " " + p.en + " " + (p.note || "") + " " + topicOf(p).name + " " + topicOf(p).es).includes(q));
+    $("listCount").textContent = `${rows.length} match${rows.length === 1 ? "" : "es"} in all sections`;
+    $("list").innerHTML = rows.length ? rows.map((p) => row(p, true)).join("") : `<li class="empty">No phrases match “${esc(raw)}”.</li>`;
   }
   $("search").addEventListener("input", renderList);
-  $("list").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-say]");
-    if (b) speak(PHRASES[+b.dataset.say].es);
+  $("listView").addEventListener("click", (e) => {
+    const s = e.target.closest("[data-say]");
+    if (s) speak(PHRASES[+s.dataset.say].es);
+    const b = e.target.closest("[data-show]");
+    if (b) {
+      const p = PHRASES[+b.dataset.show];
+      $("showEs").textContent = p.es;
+      $("showEn").textContent = p.en;
+      $("show").classList.remove("hidden");
+      speak(p.es);
+    }
   });
+  $("show").addEventListener("click", () => $("show").classList.add("hidden"));
 
   // ---------- Mode switch ----------
   document.querySelectorAll(".mode").forEach((b) =>
@@ -230,7 +286,7 @@
       $("listView").classList.toggle("hidden", state.mode !== "list");
     }));
 
-  if (!catById[state.cat] && state.cat !== "all") state.cat = "all";
+  if (!catById[state.cat]) state.cat = "garden";
   renderCats();
   buildDeck(false);
   renderList();

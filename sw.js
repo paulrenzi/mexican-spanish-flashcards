@@ -1,5 +1,5 @@
 // Network first so updates show up immediately; fall back to cache when offline.
-const CACHE = "orale-v1";
+const CACHE = "orale-v2";
 const FILES = ["./", "index.html", "style.css", "app.js", "phrases.js", "icon.svg", "manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {

@@ -261,3 +261,32 @@ footer { text-align: center; font-size: 0.75rem; color: #aaa; padding: 18px 0 14
   .prompt { font-size: 2rem; }
   .es { font-size: 2.1rem; }
 }
+
+/* Topic keywords that expand into phrases */
+.list-tools { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted); margin: 8px 2px; }
+.topic { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; margin-bottom: 8px; overflow: hidden; }
+.topic summary { list-style: none; display: flex; align-items: center; gap: 10px; padding: 13px 14px; cursor: pointer; font-weight: 700; font-size: 1.05rem; }
+.topic summary::-webkit-details-marker { display: none; }
+.topic summary::after { content: "›"; margin-left: 4px; font-size: 1.4rem; color: var(--muted); transition: transform .15s; }
+.topic[open] summary::after { transform: rotate(90deg); }
+.topic[open] summary { border-bottom: 1.5px solid var(--line); background: #f4fbf7; }
+.t-ic { font-size: 1.4rem; }
+.t-name { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.t-es { font-size: 0.8rem; font-weight: 600; color: var(--green); }
+.t-n { font-size: 0.75rem; color: var(--muted); background: #efe6d7; border-radius: 999px; padding: 2px 8px; }
+.topic h3 { margin: 12px 14px 4px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.topic .list { margin: 0; padding: 0 8px; }
+.topic .item { border-left: 0; border-right: 0; border-radius: 0; margin: 0; border-width: 0 0 1px; }
+.item.hear .l-es { color: #9a5b00; }
+.item .btns { display: flex; flex-direction: column; gap: 6px; }
+.l-where { font-size: 0.72rem; color: var(--muted); margin-bottom: 2px; }
+.words { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; padding: 4px 12px 14px; }
+.word { border: 1.5px solid var(--line); background: #fffdf8; border-radius: 12px; padding: 8px 10px; text-align: left; display: flex; flex-direction: column; min-width: 0; }
+.w-es { font-weight: 700; color: var(--green); }
+.w-en { font-size: 0.8rem; color: var(--muted); }
+
+/* Show-it-big overlay for handing the phone to staff */
+.show { position: fixed; inset: 0; z-index: 50; background: var(--green); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; text-align: center; }
+.show-es { font-size: clamp(2rem, 9vw, 3.4rem); font-weight: 800; line-height: 1.15; margin: 0 0 16px; }
+.show-en { font-size: 1.1rem; opacity: .85; margin: 0; }
+.show-hint { position: absolute; bottom: calc(24px + env(safe-area-inset-bottom)); font-size: .8rem; opacity: .6; }

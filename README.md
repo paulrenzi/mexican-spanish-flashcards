@@ -1,13 +1,14 @@
-# ¡Órale! Mexican Spanish Flashcards
+# ¡Órale! Mexican Spanish Phrasebook
 
-Mobile-friendly flashcards for the Mexican Spanish you actually use: everyday phrases, ordering at restaurants, and shopping.
+A mobile phrasebook for the Mexican Spanish you actually use: everyday phrases, ordering at restaurants, and shopping.
 
 **Live:** https://paulrenzi.github.io/mexican-spanish-flashcards/
 
-- Tap a card to flip it. Swipe right (or **Got it**) if you know it, left (or **Again**) to see it again soon.
-- 🔊 reads the phrase aloud with a Mexican Spanish voice when your phone has one.
-- **List** view is a searchable phrasebook for use at the table or the register.
-- Progress is saved on your device. Works offline after the first visit, and you can add it to your home screen.
+- **Phrases** (the default) is organized by situation: Everyday, Restaurant, Store, Garden (vivero). Each situation is a list of topic keywords (e.g. *Water requirements*, *Light requirements*) that expand into what you ask, what you'll hear back, and single words.
+- 🔊 reads the phrase aloud with a Mexican Spanish voice when your phone has one. ⤢ shows it full-screen to hand to the staff.
+- Search covers every situation at once.
+- **Practice** is the old flashcard mode for the current situation: tap to flip, swipe right if you know it.
+- Progress and open topics are saved on your device. Works offline after the first visit.
 
 Plain HTML/CSS/JS, no build step. Phrases live in `phrases.js`.
 
