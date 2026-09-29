@@ -12,6 +12,23 @@ Scope only. **Nothing is built.** Harness: `tools/voice-eval/`.
 | Offline download | **Up to ~500 MB** | Allows Whisper **small** in the browser; turbo does not fit (below). |
 | Online v1 cost | **A small cost is OK** | v1 can use a server-side model through one Cloudflare Worker. |
 
+## The problem we are solving (Paul, 2026-09-28)
+
+> When I select Spanish in Google Translate, I get non-Mexican Spanish, and I have no idea
+> how to select Mexican Spanish, which means most other people don't either.
+
+So the product is **Mexican Spanish out, with no setting to find.** In practice that means:
+- **English→Spanish must come out Mexican.** That means Mexican words (*carro, cloro, jarabe,
+  popote, alberca, celular*), *usted* by default when talking to a clerk, a driver or a
+  mechanic, and never *vosotros*.
+- **Spanish→English must understand Mexican words** (*piquete, cajero, ¿pica?, ahorita*).
+- **Speech-to-text is not the gap.** §2 shows Whisper already ties Google on Mexican speech.
+  The gap is in the **translation**, and §3 shows it.
+
+As far as a search found (2026-09-28), Google Translate offers a single "Spanish" as a
+translation target, with no Mexican variant to pick. This is unconfirmed. Low-quality SEO pages
+dominate the results, and Google's help pages were not checked.
+
 ## 1. Recommended setup
 
 **v1 (online):** a mic button for each speaker (🇲🇽 / 🇺🇸), like Google's manual conversation
@@ -22,8 +39,10 @@ mode. Automatic language detection on short utterances is the usual failure, so 
 2. **Glossary layer (in the app, plain JS):** if the transcript matches a curated phrase
    (normalised, fuzzy), show the curated English. Otherwise run MT, with `phrases.js` words
    pinned as a glossary. §3 shows why this layer is the real accuracy win.
-3. **Translation:** a model that takes a glossary and a register instruction. Candidates:
-   an instruction LLM on Workers AI, or Google Cloud Translation. **Not yet measured — see §5.**
+3. **Translation:** a model that takes a glossary and a register instruction ("Mexican
+   Spanish, usted"). An instruction LLM on Workers AI is the first candidate, because an
+   instruction is the only way to get register right. A glossary alone can fix words but not
+   *tú/usted*. Google Cloud Translation is the comparison. **Not yet measured — see §5.**
 4. **Output:** Spanish shows big; English goes underneath. Spanish is spoken with the existing
    `speechSynthesis` es-MX voice.
 
@@ -143,7 +162,19 @@ near iOS Safari's per-tab memory ceiling, so turbo stays server-side.
 | Two-way | both mic buttons; Whisper handles English well | same |
 | Unknown | Mexican-situation accuracy; translation choice | iPhone WASM latency |
 
+**The hardest piece is offline English→Mexican Spanish.** Bergamot and opus-mt are trained
+largely on European data, and §3 shows opus-mt producing *lejía* and *tú*. The glossary layer
+fixes words but not register. Options for v2 are: accept this for free-form sentences and
+prefer curated phrases whenever the English matches one; a small on-device LLM (likely too big
+next to Whisper within 500 MB, unmeasured); or Apple's Translation framework through the native
+shell in §4 (its Spanish variant is unchecked).
+
 **Open, before anything final:**
+0. **Measure the problem itself.** Take the 200 phrasebook English sentences through Google
+   Translate to Spanish. Count non-Mexican words and *tú* where *usted* belongs, against the
+   curated Mexican text. Do the same for the v1 candidate. This is the headline test, and it
+   was not run (Google's free endpoint returned 429). Paul checking 20 phrases by hand in the
+   Translate app would give the first signal.
 1. **Paul's recordings.** 30–50 short clips in the app's situations (taxi, pharmacy, mechanic,
    bank), recorded with permission, each with a note of what was actually said.
    `tools/voice-eval/` scores them unchanged. This is the only test of "better than Google
