@@ -1,13 +1,9 @@
 name = "mx-voice"
 main = "index.js"
 compatibility_date = "2026-09-01"
-compatibility_flags = ["nodejs_compat"]
 account_id = "83f33c67294ca2f2f0869b63c1663b0e"
 
-[ai]
-binding = "AI"
-
-# 12 requests per minute per IP per route. Secrets (wrangler secret put): ORIGIN_URL, ORIGIN_SECRET.
+# 12 translations per minute per IP (protects the Max plan; speech-to-text is not capped). Secrets (wrangler secret put): ORIGIN_URL, ORIGIN_SECRET.
 [[ratelimits]]
 name = "LIMIT"
 namespace_id = "7301"

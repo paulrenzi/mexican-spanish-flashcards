@@ -1,9 +1,8 @@
 // mx-voice: the public half of voice dictation.
 //   POST /stt?lang=es|en   body = 16 kHz mono WAV (the page converts)  -> {text}
 //   POST /translate        {"text", "from": "en"|"es"}                   -> {text, ms}
-// /stt runs Whisper on Workers AI. /translate forwards to the oracle-vm origin (claude -p on the Max plan)
-// with the shared secret. No Anthropic key lives here, by rule.
-import { VOCAB_ES } from "./vocab.js";
+// Both forward to the oracle-vm origin with the shared secret: /stt runs Parakeet on its CPU (free, no quota),
+// /translate runs claude -p on the Max plan. No Anthropic key lives here, by rule.
 
 const ALLOWED = ["https://paulrenzi.github.io", "http://localhost:8765"];
 const MAX_AUDIO = 1_000_000; // ~30 s of 16 kHz mono 16-bit WAV
@@ -23,20 +22,23 @@ const json = (req, code, obj) =>
   new Response(JSON.stringify(obj), { status: code, headers: { "Content-Type": "application/json; charset=utf-8", ...cors(req) } });
 
 async function stt(req, env, url) {
+  if (!env.ORIGIN_URL || !env.ORIGIN_SECRET) return json(req, 503, { error: "origin_not_connected" });
   const lang = url.searchParams.get("lang");
   if (lang !== "es" && lang !== "en") return json(req, 400, { error: "lang must be es or en" });
   const buf = await req.arrayBuffer();
   if (!buf.byteLength || buf.byteLength > MAX_AUDIO) return json(req, 413, { error: "audio empty or longer than ~30 s" });
-  const input = { audio: Buffer.from(buf).toString("base64"), language: lang, vad_filter: true };
-  if (lang === "es") input.initial_prompt = VOCAB_ES;
-  try {
-    const r = await env.AI.run("@cf/openai/whisper-large-v3-turbo", input);
-    return json(req, 200, { text: (r.text || "").trim() });
-  } catch (e) {
-    const m = String(e && e.message);
-    if (m.includes("4006")) return json(req, 503, { error: "stt_quota", detail: "Speech-to-text is used up for today (resets 00:00 UTC)." });
-    return json(req, 502, { error: "stt_failed", detail: m.slice(0, 200) });
-  }
+  return forward(req, env, "/stt?lang=" + lang, "audio/wav", buf);
+}
+
+async function forward(req, env, path, type, body) {
+  const r = await fetch(env.ORIGIN_URL.replace(/\/$/, "") + path, {
+    method: "POST",
+    headers: { "Content-Type": type, "X-Origin-Secret": env.ORIGIN_SECRET },
+    body,
+  }).catch(() => null);
+  if (!r) return json(req, 502, { error: "origin_unreachable" });
+  const d = await r.json().catch(() => ({ error: "origin_bad_reply" }));
+  return json(req, r.ok ? 200 : r.status === 503 ? 503 : 502, d);
 }
 
 async function translate(req, env) {
@@ -45,14 +47,7 @@ async function translate(req, env) {
   try { body = await req.json(); } catch { return json(req, 400, { error: "bad json" }); }
   const text = String(body.text || "").trim();
   if (!text || text.length > MAX_TEXT || (body.from !== "en" && body.from !== "es")) return json(req, 400, { error: "need text and from en|es" });
-  const r = await fetch(env.ORIGIN_URL.replace(/\/$/, "") + "/translate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Origin-Secret": env.ORIGIN_SECRET },
-    body: JSON.stringify({ text, from: body.from }),
-  }).catch(() => null);
-  if (!r) return json(req, 502, { error: "origin_unreachable" });
-  const d = await r.json().catch(() => ({ error: "origin_bad_reply" }));
-  return json(req, r.ok ? 200 : r.status === 503 ? 503 : 502, d);
+  return forward(req, env, "/translate", "application/json", JSON.stringify({ text, from: body.from }));
 }
 
 export default {
@@ -61,9 +56,11 @@ export default {
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(req) });
     if (req.method === "GET" && url.pathname === "/") return json(req, 200, { ok: true, origin: !!env.ORIGIN_URL });
     if (req.method !== "POST" || !["/stt", "/translate"].includes(url.pathname)) return json(req, 404, { error: "not found" });
+    if (url.pathname === "/stt") return stt(req, env, url);
+    // Only translation spends the Max plan, so only it is capped per IP.
     const ip = req.headers.get("CF-Connecting-IP") || "?";
-    const { success } = await env.LIMIT.limit({ key: ip + url.pathname });
+    const { success } = await env.LIMIT.limit({ key: ip });
     if (!success) return json(req, 429, { error: "rate_limited", detail: "Too many requests; wait a minute." });
-    return url.pathname === "/stt" ? stt(req, env, url) : translate(req, env);
+    return translate(req, env);
   },
 };

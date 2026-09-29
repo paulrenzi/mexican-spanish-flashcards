@@ -1,5 +1,5 @@
 [Unit]
-Description=mx-voice translation origin (claude -p on the Max plan)
+Description=mx-voice origin: Parakeet speech-to-text + claude -p translation on the Max plan
 After=network-online.target
 
 [Service]
@@ -7,7 +7,7 @@ User=ubuntu
 WorkingDirectory=/home/ubuntu/repos/mexican-spanish-flashcards/voice/origin
 EnvironmentFile=/home/ubuntu/.config/mx-voice/origin.env
 Environment=PATH=/home/ubuntu/.npm-global/bin:/usr/local/bin:/usr/bin:/bin
-ExecStart=/usr/bin/python3 server.py
+ExecStart=/home/ubuntu/repos/mexican-spanish-flashcards/voice/origin/.venv/bin/python server.py
 Restart=always
 RestartSec=3
 

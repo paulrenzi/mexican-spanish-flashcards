@@ -69,7 +69,8 @@ Lower is better.
 
 | Engine | Size (phone download) | Verbatim WER | **Content WER** | CPU speed here¹ |
 |---|---|---|---|---|
-| Google Web Speech es-MX | server | **12.1%** | **8.8%** | — |
+| **Parakeet TDT 0.6B v3** int8 (added 09-29, **v1 engine**)³ | server (~640 MB) | **11.6%** | **8.2%** | **0.08×** |
+| Google Web Speech es-MX | server | 12.1% | 8.8% | — |
 | Whisper large-v3-turbo **+ phrasebook prompt** | server (563–759 MB in browser) | 13.3% | **8.8%** | 1.5× real time |
 | Whisper large-v3-turbo | same | 14.1% | 9.7% | 1.4× |
 | **LATAM** fine-tune (turbo)² | 820 MB (CT2 int8) | 15.0% | 10.2% | 1.6× |
@@ -79,7 +80,8 @@ Lower is better.
 | Whisper base | 60 MB q5_1 / 77 MB | 20.6% | 15.9% | 0.51× |
 | Whisper tiny | 41 MB | 23.3% | 19.0% | 0.29× |
 
-¹ Time to transcribe ÷ audio length. int8, beam 5, 4 vCPU x86 (oracle `claude-dev`), not a phone.
+¹ Time to transcribe ÷ audio length. int8, beam 5, 4 vCPU (oracle `claude-dev`, which is **aarch64 Neoverse-N1**, not x86 as first written), not a phone.
+³ `nvidia/parakeet-tdt-0.6b-v3` (CC-BY-4.0) as `istupakov/parakeet-tdt-0.6b-v3-onnx` via `onnx-asr`, `tools/voice-eval/run_parakeet.py`. No vocabulary prompt (a transducer has none) and no language flag (it detects the language). Same box: turbo with greedy decoding scored 9.1% at 1.43×, and whisper.cpp turbo q8 took 24 s for one 8.9 s clip (it always encodes a 30 s window). **Parakeet replaced Workers AI Whisper in v1 on 09-29**, because Workers AI has a daily quota and this runs free on our own CPU.
 ² `marianbasti/whisper-large-v3-turbo-latam` (MIT; Common Voice 17 es, filtered to Latin American
 accents), run as `nekusu/faster-whisper-large-v3-turbo-latam-int8-ct2`. **No Whisper checkpoint
 trained specifically on Mexican Spanish exists on Hugging Face** (searched 2026-09-28: `mexican`,

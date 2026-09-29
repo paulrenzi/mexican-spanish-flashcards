@@ -178,10 +178,10 @@ try:
               "newest turn is on top, Spanish big with English under")
         check(first.locator(".t-src").inner_text() == "Translated by Claude", "model translations are labelled")
 
-        stt_reply.update(status=503, body='{"error": "stt_quota"}')
+        stt_reply.update(status=503, body='{"error": "origin_not_connected"}')
         tp.click(".mic[data-from=en]"); tp.wait_for_timeout(800); tp.click(".mic[data-from=en]")
         tp.wait_for_selector(".turn.err")
-        check("used up for today" in tp.inner_text(".turn.err .t-err"), "a spent Whisper allowance says so plainly")
+        check("isn't connected yet" in tp.inner_text(".turn.err .t-err"), "an unconnected voice server says so plainly")
         tp.fill("#talkText", "¿Hay un cajero por aquí?")
         tp.click("[data-type-from=es]")
         tp.wait_for_function("document.querySelectorAll('.turn').length === 4")

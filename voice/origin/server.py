@@ -1,13 +1,21 @@
-"""Translation origin for voice dictation. Stdlib only.
+"""Speech-to-text and translation origin for voice dictation.
 
+POST /stt?lang=es|en  body = 16 kHz mono 16-bit WAV    ->  {"text": "...", "ms": 123}
 POST /translate  {"text": "...", "from": "en"|"es"}  ->  {"text": "...", "ms": 1234}
 Header X-Origin-Secret must match ORIGIN_SECRET. Only the Cloudflare Worker knows it.
+
+Speech-to-text is NVIDIA Parakeet TDT 0.6B v3 (CC-BY-4.0, int8 ONNX via onnx-asr) on this box's CPU:
+free, no quota, ~0.08 s per second of audio. It beat Google and Whisper turbo on the 60-clip Mexican
+Spanish set (content WER 8.2% vs 8.8%, tools/voice-eval). It detects the language itself; `lang` is logged only.
 
 Every translation is one `claude -p --model opus --effort low` call on the Max plan login,
 with every ANTHROPIC_* variable stripped from the child env so the paid API can never be used.
 The en->es prompt is the one measured in tools/voice-eval/mt_workers_llm_v2.py (step0, §3b).
 """
-import hmac, json, os, pathlib, subprocess, threading, time
+import hmac, io, json, os, pathlib, subprocess, threading, time, wave
+
+import numpy as np
+import onnx_asr
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -18,6 +26,9 @@ MAX_CHARS = 400
 SLOTS = threading.BoundedSemaphore(int(os.environ.get("SLOTS", "2")))
 ENV = {k: v for k, v in os.environ.items() if not k.startswith("ANTHROPIC_")}
 ENV.pop("ORIGIN_SECRET", None)
+MAX_AUDIO = 1_000_000  # ~30 s of 16 kHz mono 16-bit WAV
+ASR = onnx_asr.load_model("nemo-parakeet-tdt-0.6b-v3", quantization="int8")
+ASR_LOCK = threading.Lock()  # one transcription at a time keeps all 4 cores on it
 
 SYS = {
     "en": ("You are the translation engine inside an English-Spanish interpreter app used in Mexico. The user message is one thing a person said out loud. "
@@ -37,6 +48,15 @@ SYS = {
            "\n\nReply with the English translation only: no quotes, no notes, no alternatives."),
 }
 ASK = {"en": "Translate this into Mexican Spanish:\n<<<{}>>>", "es": "Translate this into English:\n<<<{}>>>"}
+
+
+def transcribe(data):
+    w = wave.open(io.BytesIO(data))
+    if w.getframerate() != 16000 or w.getnchannels() != 1 or w.getsampwidth() != 2:
+        raise ValueError("need 16 kHz mono 16-bit WAV")
+    a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+    with ASR_LOCK:
+        return ASR.recognize(a, sample_rate=16000).strip()
 
 
 def translate(text, src):
@@ -62,10 +82,13 @@ class H(BaseHTTPRequestHandler):
         self.reply(200, {"ok": True}) if self.path == "/health" else self.reply(404, {"error": "not found"})
 
     def do_POST(self):
-        if self.path != "/translate":
+        path, _, query = self.path.partition("?")
+        if path not in ("/stt", "/translate"):
             return self.reply(404, {"error": "not found"})
         if not SECRET or not hmac.compare_digest(self.headers.get("X-Origin-Secret", ""), SECRET):
             return self.reply(403, {"error": "forbidden"})
+        if path == "/stt":
+            return self.stt(query)
         try:
             body = json.loads(self.rfile.read(min(int(self.headers.get("Content-Length") or 0), 8192)))
             text, src = str(body.get("text", "")).strip(), body.get("from")
@@ -85,6 +108,20 @@ class H(BaseHTTPRequestHandler):
             SLOTS.release()
         ms = int((time.time() - t) * 1000)
         self.log_message("%s %d chars %d ms", src, len(text), ms)
+        self.reply(200, {"text": out, "ms": ms})
+
+    def stt(self, query):
+        n = int(self.headers.get("Content-Length") or 0)
+        if not n or n > MAX_AUDIO:
+            return self.reply(413, {"error": "audio empty or longer than ~30 s"})
+        t = time.time()
+        try:
+            out = transcribe(self.rfile.read(n))
+        except Exception as e:
+            self.log_message("stt failed: %s", e)
+            return self.reply(400, {"error": "stt_failed"})
+        ms = int((time.time() - t) * 1000)
+        self.log_message("stt %s %d bytes %d ms", query, n, ms)
         self.reply(200, {"text": out, "ms": ms})
 
 

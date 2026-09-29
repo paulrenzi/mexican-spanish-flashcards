@@ -1,4 +1,4 @@
-// Talk: say it in English or Spanish, see it in both. Mic -> Whisper (/stt) -> phrasebook match or Claude (/translate).
+// Talk: say it in English or Spanish, see it in both. Mic -> Parakeet on our server (/stt) -> phrasebook match or Claude (/translate).
 (() => {
   const API = "https://mx-voice.paulmichaelrenzi.workers.dev";
   const MAX_SECONDS = 15;
@@ -68,9 +68,8 @@
     li.querySelector(".t-say").addEventListener("click", () => window.oraleSpeak(es));
   }
   const MESSAGES = {
-    stt_quota: "Speech-to-text is used up for today (it resets at 00:00 UTC). Type it instead.",
-    origin_not_connected: "The translation server isn't connected yet. Phrasebook phrases still work.",
-    origin_unreachable: "The translation server didn't answer. Try again in a moment.",
+    origin_not_connected: "The voice server isn't connected yet. Typed phrasebook phrases still work.",
+    origin_unreachable: "The voice server didn't answer. Try again in a moment.",
     rate_limited: "That's a lot of requests at once. Wait a minute and try again.",
     busy: "The translator is busy. Try again in a moment.",
   };

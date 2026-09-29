@@ -19,6 +19,7 @@ Run from a work dir that holds `meta.tsv`, the extracted `test/` tree
 | `sample.py` | picks 3 clips per speaker (20 speakers, 3–12 s), writes `wav/` + `sample.json` |
 | `run_google.py` | Google Web Speech endpoint (what Chrome's `SpeechRecognition` uses), `es-MX` |
 | `run_whisper.py <model> <tag> [prompt] [task]` | faster-whisper int8 on CPU; `prompt` adds the `phrases.js` vocabulary as `initial_prompt` |
+| `run_parakeet.py <model> <tag> [int8]` | NVIDIA Parakeet via `onnx-asr` (e.g. `nemo-parakeet-tdt-0.6b-v3`); the v1 engine |
 | `run_vosk.py` | Vosk `vosk-model-small-es-0.42` |
 | `score.py` | verbatim WER + "content WER" (fillers, tag-"no", repeats dropped; accents folded) |
 | `mt_phrases.py` | opus-mt es↔en on 200 phrasebook pairs, chrF vs the curated text |

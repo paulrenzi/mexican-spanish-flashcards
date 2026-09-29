@@ -4,6 +4,16 @@
 that adds this file. **Supersedes** `docs/HANDOFF-VOICE-DICTATION-BUILD-20260929.md` (the build plan).
 The authority is still `docs/SCOPE-VOICE-DICTATION.md` §1 / §3b.
 
+## Update, same day: speech-to-text moved onto our own server
+
+Paul asked for a free speech-to-text with no quota. **NVIDIA Parakeet TDT 0.6B v3** (free download, CC-BY-4.0) now runs
+inside the origin on claude-dev's CPU. On the 60-clip Mexican Spanish set it scored a **content WER of 8.2%**, better than Google (8.8%)
+and Whisper turbo with the prompt (8.8%), at **0.08× real time** (~0.2–0.8 s per clip), against 1.4× for turbo on this box. Measured
+in `docs/SCOPE-VOICE-DICTATION.md` §1. The Worker's `/stt` now forwards the WAV to the origin; the Workers AI binding, `vocab.js` and
+the `stt_quota` error are gone, and only `/translate` is rate-limited. Live on claude-dev: Spanish clip → 753 ms, English words ~170 ms,
+403 without the secret. **So the tunnel is now the only blocker for both halves**, and item 2 below no longer applies.
+The origin runs from `voice/origin/.venv` (`pip install -r voice/origin/requirements.txt`); the model (~640 MB) caches in `~/.cache/huggingface`.
+
 ## State in one line
 
 Every piece is built and tested. The **Worker → origin link is NOT connected**, because the Cloudflare Tunnel was
