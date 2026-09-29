@@ -1,7 +1,8 @@
 // mx-voice: the public half of voice dictation.
 //   POST /stt?lang=es|en   body = 16 kHz mono WAV (the page converts)  -> {text}
 //   POST /translate        {"text", "from": "en"|"es"}                   -> {text, ms}
-// Both forward to the oracle-vm origin with the shared secret: /stt runs Parakeet on its CPU (free, no quota),
+// Both forward to the oracle-vm origin with the shared secret, over the ORIGIN binding (Workers VPC -> Cloudflare Tunnel
+// mx-voice-origin -> 127.0.0.1:8791; the origin has no public hostname): /stt runs Parakeet on its CPU (free, no quota),
 // /translate runs claude -p on the Max plan. No Anthropic key lives here, by rule.
 
 const ALLOWED = ["https://paulrenzi.github.io", "http://localhost:8765"];
@@ -21,8 +22,10 @@ function cors(req) {
 const json = (req, code, obj) =>
   new Response(JSON.stringify(obj), { status: code, headers: { "Content-Type": "application/json; charset=utf-8", ...cors(req) } });
 
+const connected = (env) => !!(env.ORIGIN && env.ORIGIN_SECRET);
+
 async function stt(req, env, url) {
-  if (!env.ORIGIN_URL || !env.ORIGIN_SECRET) return json(req, 503, { error: "origin_not_connected" });
+  if (!connected(env)) return json(req, 503, { error: "origin_not_connected" });
   const lang = url.searchParams.get("lang");
   if (lang !== "es" && lang !== "en") return json(req, 400, { error: "lang must be es or en" });
   const buf = await req.arrayBuffer();
@@ -31,7 +34,7 @@ async function stt(req, env, url) {
 }
 
 async function forward(req, env, path, type, body) {
-  const r = await fetch(env.ORIGIN_URL.replace(/\/$/, "") + path, {
+  const r = await env.ORIGIN.fetch("http://127.0.0.1:8791" + path, {
     method: "POST",
     headers: { "Content-Type": type, "X-Origin-Secret": env.ORIGIN_SECRET },
     body,
@@ -42,7 +45,7 @@ async function forward(req, env, path, type, body) {
 }
 
 async function translate(req, env) {
-  if (!env.ORIGIN_URL || !env.ORIGIN_SECRET) return json(req, 503, { error: "origin_not_connected" });
+  if (!connected(env)) return json(req, 503, { error: "origin_not_connected" });
   let body;
   try { body = await req.json(); } catch { return json(req, 400, { error: "bad json" }); }
   const text = String(body.text || "").trim();
@@ -54,7 +57,7 @@ export default {
   async fetch(req, env) {
     const url = new URL(req.url);
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(req) });
-    if (req.method === "GET" && url.pathname === "/") return json(req, 200, { ok: true, origin: !!env.ORIGIN_URL });
+    if (req.method === "GET" && url.pathname === "/") return json(req, 200, { ok: true, origin: connected(env) });
     if (req.method !== "POST" || !["/stt", "/translate"].includes(url.pathname)) return json(req, 404, { error: "not found" });
     if (url.pathname === "/stt") return stt(req, env, url);
     // Only translation spends the Max plan, so only it is capped per IP.

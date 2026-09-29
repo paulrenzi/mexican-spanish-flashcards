@@ -1,0 +1,14 @@
+[Unit]
+Description=Cloudflare Tunnel mx-voice-origin (Worker -> origin via Workers VPC, no public hostname)
+After=network-online.target mx-voice-origin.service
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+EnvironmentFile=/home/ubuntu/.config/mx-voice/tunnel.env
+ExecStart=/home/ubuntu/bin/cloudflared tunnel run
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

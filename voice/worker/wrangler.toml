@@ -3,8 +3,13 @@ main = "index.js"
 compatibility_date = "2026-09-01"
 account_id = "83f33c67294ca2f2f0869b63c1663b0e"
 
-# 12 translations per minute per IP (protects the Max plan; speech-to-text is not capped). Secrets (wrangler secret put): ORIGIN_URL, ORIGIN_SECRET.
+# 12 translations per minute per IP (protects the Max plan; speech-to-text is not capped). Secret (wrangler secret put): ORIGIN_SECRET.
 [[ratelimits]]
 name = "LIMIT"
 namespace_id = "7301"
 simple = { limit = 12, period = 60 }
+
+# The origin on claude-dev, reached through Cloudflare Tunnel mx-voice-origin (4ed33014…); no public hostname.
+[[vpc_services]]
+binding = "ORIGIN"
+service_id = "01a0eeb8-9346-7530-bd7a-36d187bad871"

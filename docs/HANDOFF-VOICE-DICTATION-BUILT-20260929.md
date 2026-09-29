@@ -4,6 +4,27 @@
 that adds this file. **Supersedes** `docs/HANDOFF-VOICE-DICTATION-BUILD-20260929.md` (the build plan).
 The authority is still `docs/SCOPE-VOICE-DICTATION.md` §1 / §3b.
 
+## Update 2, same day: CONNECTED — live end to end (Paul approved the tunnel)
+
+- **Cloudflare Tunnel `mx-voice-origin`** (`4ed33014-55be-44e2-a2f0-1b04204ffe44`, remotely managed) runs as systemd
+  `mx-voice-tunnel` on claude-dev (`voice/origin/mx-voice-tunnel.service`). Its token is in `~/.config/mx-voice/tunnel.env`
+  (mode 600, not in git).
+- **No public hostname.** The tunnel is reached only through a **Workers VPC service** `mx-voice-origin`
+  (`01a0eeb8-9346-7530-bd7a-36d187bad871`, `127.0.0.1:8791`), bound to the Worker as `env.ORIGIN`. `ORIGIN_URL` is gone.
+  `ORIGIN_SECRET` is set as a Worker secret, and the origin still refuses requests without it.
+- 🔑 **Deploy this Worker with `CLOUDFLARE_API_TOKEN`.** The worker-deploy token fails on the VPC binding with
+  `10196 … not authorized for the requested VPC resource`.
+- **Verified from the public Worker:**
+  - `GET /` gives `{"ok":true,"origin":true}`.
+  - `/stt` on a CIEMPIESS clip: 200, 1.08 s round trip.
+  - `/translate` "Where can I buy water?" → "¿Dónde puedo comprar agua?", 3.2 s.
+- **Nothing expires:**
+  - Both units are `enabled` and `Restart=always`.
+  - The tunnel token and the VPC service have no expiry, and the Cloudflare account token reports `expires_on: null`.
+  - cloudflared **auto-updates daily**. Cloudflare drops support for releases about a year old.
+  - The `claude` login on claude-dev has a refresh token and renews itself.
+- **Still open:** the iPhone test (Safari recording → WAV).
+
 ## Update, same day: speech-to-text moved onto our own server
 
 Paul asked for a free speech-to-text with no quota. **NVIDIA Parakeet TDT 0.6B v3** (free download, CC-BY-4.0) now runs
