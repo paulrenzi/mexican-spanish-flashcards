@@ -1,0 +1,1002 @@
+[
+{
+"en": "I have a bite that looks infected.",
+"ref": "Tengo un piquete que se ve infectado.",
+"out": "Tengo una mordida que se ve infectada."
+},
+{
+"en": "Does the pot have a drainage hole?",
+"ref": "¿La maceta tiene hoyo para el drenaje?",
+"out": "¿La maceta tiene un hoyo de drenaje?"
+},
+{
+"en": "Make me a list of what we're out of.",
+"ref": "Hágame una lista de lo que falta.",
+"out": "Hágame una lista de lo que se nos acabó."
+},
+{
+"en": "Can you give me the quote in writing?",
+"ref": "¿Me da el presupuesto por escrito?",
+"out": "¿Me puede dar la cotización por escrito?"
+},
+{
+"en": "I'll have…, please",
+"ref": "Me da…, por favor",
+"out": "Voy a querer…, por favor"
+},
+{
+"en": "It's delicious!",
+"ref": "¡Está muy rico!",
+"out": "¡Está delicioso!"
+},
+{
+"en": "Where do I pick up my license?",
+"ref": "¿Dónde recojo mi licencia?",
+"out": "¿Dónde recojo mi licencia?"
+},
+{
+"en": "Can you give me a discount?",
+"ref": "¿Me hace un descuento?",
+"out": "¿Me puede hacer un descuento?"
+},
+{
+"en": "Can you do the laundry?",
+"ref": "¿Puede lavar la ropa?",
+"out": "¿Puede lavar la ropa?"
+},
+{
+"en": "Can I deposit to this account?",
+"ref": "¿Puedo depositar a esta cuenta?",
+"out": "¿Puedo hacer un depósito a esta cuenta?"
+},
+{
+"en": "Is it spicy?",
+"ref": "¿Pica?",
+"out": "¿Está picoso?"
+},
+{
+"en": "Does it stop at the airport?",
+"ref": "¿Para en el aeropuerto?",
+"out": "¿Se para en el aeropuerto?"
+},
+{
+"en": "Can I pay by card here at the pump?",
+"ref": "¿Puedo pagar con tarjeta aquí en la bomba?",
+"out": "¿Puedo pagar con tarjeta aquí en la bomba?"
+},
+{
+"en": "See you",
+"ref": "Nos vemos",
+"out": "Nos vemos"
+},
+{
+"en": "Where can I find…?",
+"ref": "¿Dónde encuentro…?",
+"out": "¿Dónde puedo encontrar…?"
+},
+{
+"en": "It's making a strange noise.",
+"ref": "Hace un ruido raro.",
+"out": "Está haciendo un ruido extraño."
+},
+{
+"en": "There's damp in the wall.",
+"ref": "Hay humedad en la pared.",
+"out": "Hay humedad en la pared."
+},
+{
+"en": "A coffee with milk",
+"ref": "Un café con leche",
+"out": "Un café con leche"
+},
+{
+"en": "Is there a mechanic nearby?",
+"ref": "¿Hay un mecánico cerca?",
+"out": "¿Hay un mecánico cerca?"
+},
+{
+"en": "Bigger / smaller",
+"ref": "Más grande / más chico",
+"out": "Más grande / más chico"
+},
+{
+"en": "My house was broken into.",
+"ref": "Entraron a robar a mi casa.",
+"out": "Se metieron a robar a mi casa."
+},
+{
+"en": "When can you come?",
+"ref": "¿Cuándo puede venir?",
+"out": "¿Cuándo puede venir?"
+},
+{
+"en": "Not spicy, please",
+"ref": "Que no pique, por favor",
+"out": "Sin picante, por favor"
+},
+{
+"en": "I want to change dollars.",
+"ref": "Quiero cambiar dólares.",
+"out": "Quiero cambiar dólares."
+},
+{
+"en": "Every other day",
+"ref": "Cada tercer día",
+"out": "Un día sí y un día no"
+},
+{
+"en": "Cash or card?",
+"ref": "¿Efectivo o tarjeta?",
+"out": "¿Efectivo o tarjeta?"
+},
+{
+"en": "Is the seller the registered owner?",
+"ref": "¿El vendedor es el dueño registrado?",
+"out": "¿El vendedor es el propietario registrado?"
+},
+{
+"en": "How much are the closing costs?",
+"ref": "¿Cuánto son los gastos de cierre?",
+"out": "¿Cuánto cuestan los gastos de cierre?"
+},
+{
+"en": "The tooth has to come out.",
+"ref": "Hay que sacar la muela.",
+"out": "La muela se tiene que sacar."
+},
+{
+"en": "I'm vegetarian",
+"ref": "Soy vegetariano / vegetariana",
+"out": "Soy vegetariano"
+},
+{
+"en": "Do you have coins?",
+"ref": "¿Tiene monedas?",
+"out": "¿Tiene monedas?"
+},
+{
+"en": "When is it due?",
+"ref": "¿Cuándo vence?",
+"out": "¿Para cuándo vence?"
+},
+{
+"en": "The bleach is all gone.",
+"ref": "Ya se acabó el cloro.",
+"out": "Se acabó el cloro."
+},
+{
+"en": "Could I get a napkin?",
+"ref": "¿Me regala una servilleta?",
+"out": "¿Me puede dar una servilleta?"
+},
+{
+"en": "Can I have a receipt?",
+"ref": "¿Me da un ticket?",
+"out": "¿Me puede dar un recibo?"
+},
+{
+"en": "What's the house specialty?",
+"ref": "¿Cuál es la especialidad de la casa?",
+"out": "¿Cuál es la especialidad de la casa?"
+},
+{
+"en": "Is there an ATM around here?",
+"ref": "¿Hay un cajero por aquí?",
+"out": "¿Hay un cajero automático por aquí?"
+},
+{
+"en": "Is it an indoor or outdoor plant?",
+"ref": "¿Es de interior o de exterior?",
+"out": "¿Es una planta de adentro o de afuera?"
+},
+{
+"en": "Do you have it as a syrup?",
+"ref": "¿Lo tiene en jarabe?",
+"out": "¿Lo tiene en jarabe?"
+},
+{
+"en": "Can you come take a look at it?",
+"ref": "¿Puede venir a verlo?",
+"out": "¿Puede venir a echarle un vistazo?"
+},
+{
+"en": "Does it need good drainage?",
+"ref": "¿Necesita buen drenaje?",
+"out": "¿Necesita buen drenaje?"
+},
+{
+"en": "Are you OK? Are you hurt?",
+"ref": "¿Está bien? ¿Está herido?",
+"out": "¿Está bien? ¿Está herido?"
+},
+{
+"en": "Should I let the soil dry out between waterings?",
+"ref": "¿Hay que dejar que se seque la tierra?",
+"out": "¿Debo dejar que la tierra se seque entre riegos?"
+},
+{
+"en": "We don't take torn bills.",
+"ref": "No aceptamos billetes rotos.",
+"out": "No aceptamos billetes rotos."
+},
+{
+"en": "Finish the whole course.",
+"ref": "Termine todo el tratamiento.",
+"out": "Termine todo el curso."
+},
+{
+"en": "How much is the fee?",
+"ref": "¿Cuánto cobra de comisión?",
+"out": "¿Cuánto es la cuota?"
+},
+{
+"en": "It hurts here.",
+"ref": "Me duele aquí.",
+"out": "Me duele aquí."
+},
+{
+"en": "Does it bear fruit? How long until it does?",
+"ref": "¿Da fruto? ¿En cuánto tiempo?",
+"out": "¿Da fruto? ¿Cuánto tiempo tarda en hacerlo?"
+},
+{
+"en": "That's all, thanks",
+"ref": "Es todo, gracias",
+"out": "Eso es todo, gracias"
+},
+{
+"en": "A 200-peso phone top-up, please.",
+"ref": "Una recarga de doscientos, por favor.",
+"out": "Una recarga de 200 pesos, por favor."
+},
+{
+"en": "I'm going to order some lab tests.",
+"ref": "Le voy a mandar unos análisis.",
+"out": "Voy a pedir unos análisis de laboratorio."
+},
+{
+"en": "How much down payment?",
+"ref": "¿Cuánto de enganche?",
+"out": "¿Cuánto de enganche?"
+},
+{
+"en": "Do you have shade plants?",
+"ref": "¿Tienen plantas de sombra?",
+"out": "¿Tiene plantas de sombra?"
+},
+{
+"en": "Can you iron these shirts?",
+"ref": "¿Puede planchar estas camisas?",
+"out": "¿Puede planchar estas camisas?"
+},
+{
+"en": "Cash only",
+"ref": "Solo efectivo",
+"out": "Solo efectivo"
+},
+{
+"en": "I'm stranded on the highway.",
+"ref": "Me quedé tirado en la carretera.",
+"out": "Estoy varado en la carretera."
+},
+{
+"en": "Does it have meat?",
+"ref": "¿Tiene carne?",
+"out": "¿Tiene carne?"
+},
+{
+"en": "Transaction not available.",
+"ref": "Operación no disponible.",
+"out": "Transacción no disponible."
+},
+{
+"en": "Sauce on the side, please",
+"ref": "La salsa aparte, por favor",
+"out": "La salsa aparte, por favor"
+},
+{
+"en": "Are there liens on it?",
+"ref": "¿Tiene gravámenes?",
+"out": "¿Tiene gravámenes?"
+},
+{
+"en": "Which one is regular?",
+"ref": "¿Cuál es la magna?",
+"out": "¿Cuál es el normal?"
+},
+{
+"en": "At the entrance, please.",
+"ref": "En la entrada, por favor.",
+"out": "En la entrada, por favor."
+},
+{
+"en": "It keeps getting worse.",
+"ref": "Cada vez está peor.",
+"out": "Cada vez está peor."
+},
+{
+"en": "I'd rather pay it at the office.",
+"ref": "Prefiero pagarla en la oficina.",
+"out": "Prefiero pagarlo en la oficina."
+},
+{
+"en": "I'll send you a photo of the problem.",
+"ref": "Le mando una foto del problema.",
+"out": "Le voy a mandar una foto del problema."
+},
+{
+"en": "I have a prescription from the US.",
+"ref": "Tengo una receta de Estados Unidos.",
+"out": "Tengo una receta de Estados Unidos."
+},
+{
+"en": "Thank you so much, it came out great.",
+"ref": "Muchas gracias, quedó muy bien.",
+"out": "Muchas gracias, quedó excelente."
+},
+{
+"en": "Drink lots of fluids.",
+"ref": "Tome muchos líquidos.",
+"out": "Tome muchos líquidos."
+},
+{
+"en": "Do you give a guarantee?",
+"ref": "¿Da garantía?",
+"out": "¿Da garantía?"
+},
+{
+"en": "If you have time, clean the fridge.",
+"ref": "Si le da tiempo, limpie el refri.",
+"out": "Si tiene tiempo, limpie el refri."
+},
+{
+"en": "Before or after eating?",
+"ref": "¿Antes o después de comer?",
+"out": "¿Antes o después de comer?"
+},
+{
+"en": "When will it be ready?",
+"ref": "¿Para cuándo queda?",
+"out": "¿Cuándo estará listo?"
+},
+{
+"en": "What color is the flower?",
+"ref": "¿De qué color es la flor?",
+"out": "¿De qué color es la flor?"
+},
+{
+"en": "Can you give me a jump start?",
+"ref": "¿Me puede pasar corriente?",
+"out": "¿Me puede pasar corriente?"
+},
+{
+"en": "How much is it?",
+"ref": "¿Cuánto es?",
+"out": "¿Cuánto cuesta?"
+},
+{
+"en": "Can you give it to me in small bills?",
+"ref": "¿Me lo puede dar en billetes chicos?",
+"out": "¿Me lo puede dar en billetes chicos?"
+},
+{
+"en": "For how many days?",
+"ref": "¿Por cuántos días?",
+"out": "¿Por cuántos días?"
+},
+{
+"en": "It's a rental car.",
+"ref": "Es un auto rentado.",
+"out": "Es un coche de renta."
+},
+{
+"en": "Do you go by Akumal?",
+"ref": "¿Pasa por Akumal?",
+"out": "¿Pasa por Akumal?"
+},
+{
+"en": "How much do you charge per day?",
+"ref": "¿Cuánto cobra por día?",
+"out": "¿Cuánto cobra por día?"
+},
+{
+"en": "Can you give me a quote?",
+"ref": "¿Me da un presupuesto?",
+"out": "¿Me puede dar una cotización?"
+},
+{
+"en": "Do you have the generic?",
+"ref": "¿Tiene el genérico?",
+"out": "¿Tiene el genérico?"
+},
+{
+"en": "Is it furnished?",
+"ref": "¿Está amueblada?",
+"out": "¿Está amueblado?"
+},
+{
+"en": "I need an official invoice.",
+"ref": "Necesito factura.",
+"out": "Necesito una factura oficial."
+},
+{
+"en": "You need an X-ray.",
+"ref": "Necesita una radiografía.",
+"out": "Usted necesita una radiografía."
+},
+{
+"en": "No, what happened?",
+"ref": "No, ¿qué pasó?",
+"out": "No, ¿qué pasó?"
+},
+{
+"en": "It hurts with cold things.",
+"ref": "Me duele con lo frío.",
+"out": "Me duele con cosas frías."
+},
+{
+"en": "Can it take the heat?",
+"ref": "¿Aguanta el calor?",
+"out": "¿Aguanta el calor?"
+},
+{
+"en": "What time can you get here?",
+"ref": "¿A qué hora puede llegar?",
+"out": "¿A qué hora puede llegar?"
+},
+{
+"en": "Does it need to be repotted?",
+"ref": "¿Hay que trasplantarla?",
+"out": "¿Necesita que la trasplanten?"
+},
+{
+"en": "Slower, please.",
+"ref": "Más despacio, por favor.",
+"out": "Más despacio, por favor."
+},
+{
+"en": "I need a plumber.",
+"ref": "Necesito un plomero.",
+"out": "Necesito un plomero."
+},
+{
+"en": "Have a good one!",
+"ref": "¡Que le vaya bien!",
+"out": "¡Que te vaya bien!"
+},
+{
+"en": "Is the tip included?",
+"ref": "¿Está incluida la propina?",
+"out": "¿Está incluida la propina?"
+},
+{
+"en": "The ATM ate my card.",
+"ref": "El cajero se tragó mi tarjeta.",
+"out": "El cajero se tragó mi tarjeta."
+},
+{
+"en": "Can you break this bill?",
+"ref": "¿Me cambia este billete?",
+"out": "¿Puede cambiarme este billete?"
+},
+{
+"en": "I'm diabetic.",
+"ref": "Soy diabético.",
+"out": "Soy diabético."
+},
+{
+"en": "What days can you come?",
+"ref": "¿Qué días puede venir?",
+"out": "¿Qué días puede venir?"
+},
+{
+"en": "I'm going to be a little late.",
+"ref": "Voy a llegar un poquito tarde.",
+"out": "Voy a llegar un poco tarde."
+},
+{
+"en": "I want to open an account.",
+"ref": "Quiero abrir una cuenta.",
+"out": "Quiero abrir una cuenta."
+},
+{
+"en": "Since when have you felt like this?",
+"ref": "¿Desde cuándo se siente así?",
+"out": "¿Desde cuándo se siente así?"
+},
+{
+"en": "Can I pay the water bill here?",
+"ref": "¿Puedo pagar aquí el agua?",
+"out": "¿Puedo pagar aquí el recibo del agua?"
+},
+{
+"en": "Come in, please.",
+"ref": "Pásele, por favor.",
+"out": "Pase, por favor."
+},
+{
+"en": "No ice",
+"ref": "Sin hielo",
+"out": "Sin hielo"
+},
+{
+"en": "It's very expensive",
+"ref": "Está muy caro",
+"out": "Está muy caro"
+},
+{
+"en": "I have a fever.",
+"ref": "Tengo fiebre.",
+"out": "Tengo fiebre."
+},
+{
+"en": "Do you have change for a 500?",
+"ref": "¿Trae cambio de quinientos?",
+"out": "¿Tiene cambio de 500?"
+},
+{
+"en": "A beer, please",
+"ref": "Una cerveza, por favor",
+"out": "Una cerveza, por favor"
+},
+{
+"en": "I'm allergic to…",
+"ref": "Soy alérgico / alérgica a…",
+"out": "Soy alérgico a…"
+},
+{
+"en": "Do I need a prescription for this?",
+"ref": "¿Necesito receta para esto?",
+"out": "¿Necesito receta para esto?"
+},
+{
+"en": "Can I owe you the change?",
+"ref": "¿Le debo el cambio?",
+"out": "¿Le puedo deber el cambio?"
+},
+{
+"en": "I need a water truck.",
+"ref": "Necesito una pipa de agua.",
+"out": "Necesito una pipa de agua."
+},
+{
+"en": "Do you have something for a cold?",
+"ref": "¿Tiene algo para la gripa?",
+"out": "¿Tiene algo para un resfriado?"
+},
+{
+"en": "Please don't use bleach on the marble.",
+"ref": "No use cloro en el mármol, por favor.",
+"out": "Por favor, no use cloro en el mármol."
+},
+{
+"en": "If you can't come, send me a message.",
+"ref": "Si no puede venir, mándeme un mensaje.",
+"out": "Si no puede venir, mándeme un mensaje."
+},
+{
+"en": "Where is the bathroom?",
+"ref": "¿Dónde está el baño?",
+"out": "¿Dónde está el baño?"
+},
+{
+"en": "It needs a part.",
+"ref": "Le falta una pieza.",
+"out": "Le hace falta una pieza."
+},
+{
+"en": "Please dust the furniture.",
+"ref": "Sacuda los muebles, por favor.",
+"out": "Por favor, sacuda el polvo de los muebles."
+},
+{
+"en": "It's for a terrace near the sea",
+"ref": "Es para una terraza cerca del mar",
+"out": "Es para una terraza cerca del mar"
+},
+{
+"en": "Why are they selling?",
+"ref": "¿Por qué la venden?",
+"out": "¿Por qué están vendiendo?"
+},
+{
+"en": "Does it need a lot of water or a little?",
+"ref": "¿Necesita mucha agua o poca?",
+"out": "¿Necesita mucha agua o poca?"
+},
+{
+"en": "Are you going to Playa del Carmen?",
+"ref": "¿Va a Playa del Carmen?",
+"out": "¿Va a Playa del Carmen?"
+},
+{
+"en": "Do I need to come back?",
+"ref": "¿Necesito regresar?",
+"out": "¿Necesito regresar?"
+},
+{
+"en": "I gave you a 500 bill.",
+"ref": "Le di un billete de quinientos.",
+"out": "Le di un billete de 500."
+},
+{
+"en": "I have an appointment at ten.",
+"ref": "Tengo cita a las diez.",
+"out": "Tengo una cita a las diez."
+},
+{
+"en": "Does it need direct sun?",
+"ref": "¿Necesita sol directo?",
+"out": "¿Necesita sol directo?"
+},
+{
+"en": "How much to fix it?",
+"ref": "¿Cuánto cuesta arreglarlo?",
+"out": "¿Cuánto cobra por arreglarlo?"
+},
+{
+"en": "We need laundry soap.",
+"ref": "Hace falta jabón para la ropa.",
+"out": "Necesitamos jabón para la ropa."
+},
+{
+"en": "Don't let the dog out.",
+"ref": "No deje salir al perro.",
+"out": "No deje salir al perro."
+},
+{
+"en": "Who buys the materials?",
+"ref": "¿Quién compra el material?",
+"out": "¿Quién compra los materiales?"
+},
+{
+"en": "How much does it cost?",
+"ref": "¿Cuánto cuesta?",
+"out": "¿Cuánto cuesta?"
+},
+{
+"en": "Can it take wind?",
+"ref": "¿Aguanta el viento?",
+"out": "¿Aguanta el viento?"
+},
+{
+"en": "It's my first time here.",
+"ref": "Es la primera vez que vengo.",
+"out": "Es mi primera vez aquí."
+},
+{
+"en": "If you're hungry, help yourself to something from the fridge.",
+"ref": "Si tiene hambre, agarre algo del refri.",
+"out": "Si tiene hambre, sírvase algo del refri."
+},
+{
+"en": "My phone was stolen.",
+"ref": "Me robaron el celular.",
+"out": "Me robaron el celular."
+},
+{
+"en": "I twisted my ankle.",
+"ref": "Me torcí el tobillo.",
+"out": "Me torcí el tobillo."
+},
+{
+"en": "Partial shade",
+"ref": "Media sombra",
+"out": "Sombra parcial"
+},
+{
+"en": "The AC isn't cooling.",
+"ref": "El aire no enfría.",
+"out": "El aire acondicionado no está enfriando."
+},
+{
+"en": "I lost my passport.",
+"ref": "Perdí mi pasaporte.",
+"out": "Perdí mi pasaporte."
+},
+{
+"en": "I can't sleep.",
+"ref": "No puedo dormir.",
+"out": "No puedo dormir."
+},
+{
+"en": "This outlet doesn't work.",
+"ref": "Este contacto no sirve.",
+"out": "Este contacto no sirve."
+},
+{
+"en": "Please take out the trash.",
+"ref": "Saque la basura, por favor.",
+"out": "Por favor, saque la basura."
+},
+{
+"en": "The clean dishes go in this cupboard.",
+"ref": "Los trastes limpios van en esta alacena.",
+"out": "Los trastes limpios van en este gabinete."
+},
+{
+"en": "Can you check the oil?",
+"ref": "¿Me checa el aceite?",
+"out": "¿Puede revisar el aceite?"
+},
+{
+"en": "Can you give me a cost estimate?",
+"ref": "¿Me puede dar un estimado del costo?",
+"out": "¿Puede darme una cotización?"
+},
+{
+"en": "What do I owe you?",
+"ref": "¿Cuánto le debo?",
+"out": "¿Cuánto le debo?"
+},
+{
+"en": "Is it safe for kids?",
+"ref": "¿Es segura para niños?",
+"out": "¿Es seguro para niños?"
+},
+{
+"en": "How far is it from the beach?",
+"ref": "¿Qué tan lejos está de la playa?",
+"out": "¿Qué tan lejos está de la playa?"
+},
+{
+"en": "Can you clean the windshield?",
+"ref": "¿Me limpia el parabrisas?",
+"out": "¿Puede limpiar el parabrisas?"
+},
+{
+"en": "Do you have water for the radiator?",
+"ref": "¿Tienen agua para el radiador?",
+"out": "¿Tiene agua para el radiador?"
+},
+{
+"en": "You're welcome",
+"ref": "De nada",
+"out": "De nada"
+},
+{
+"en": "At the corner, please.",
+"ref": "En la esquina, por favor.",
+"out": "En la esquina, por favor."
+},
+{
+"en": "I've sent you the transfer.",
+"ref": "Ya le transferí.",
+"out": "Ya le hice la transferencia."
+},
+{
+"en": "Does it need a second plant to fruit?",
+"ref": "¿Necesita otra para dar fruto?",
+"out": "¿Necesita una segunda planta para dar fruto?"
+},
+{
+"en": "Do you sell ice?",
+"ref": "¿Venden hielo?",
+"out": "¿Vende hielo?"
+},
+{
+"en": "Since when?",
+"ref": "¿Desde cuándo?",
+"out": "¿Desde cuándo?"
+},
+{
+"en": "How's it going?",
+"ref": "¿Qué tal?",
+"out": "¿Cómo va todo?"
+},
+{
+"en": "Do you have compost?",
+"ref": "¿Tiene composta?",
+"out": "¿Tiene composta?"
+},
+{
+"en": "When will the results be ready?",
+"ref": "¿Cuándo están los resultados?",
+"out": "¿Cuándo estarán listos los resultados?"
+},
+{
+"en": "I'm going to hold your license.",
+"ref": "Le voy a recoger la licencia.",
+"out": "Voy a retener su licencia."
+},
+{
+"en": "The whites go separately.",
+"ref": "La ropa blanca va aparte.",
+"out": "Los blancos van por separado."
+},
+{
+"en": "Can you write down the diagnosis?",
+"ref": "¿Me puede escribir el diagnóstico?",
+"out": "¿Puede anotar el diagnóstico?"
+},
+{
+"en": "I got sunburned.",
+"ref": "Me quemé con el sol.",
+"out": "Me quemé con el sol."
+},
+{
+"en": "When the soil is dry",
+"ref": "Cuando la tierra esté seca",
+"out": "Cuando la tierra está seca"
+},
+{
+"en": "Could you repeat that more slowly, please?",
+"ref": "¿Me lo repite más despacio, por favor?",
+"out": "¿Podría repetir eso más despacio, por favor?"
+},
+{
+"en": "What fillings do you have?",
+"ref": "¿De qué tiene?",
+"out": "¿Qué rellenos tiene?"
+},
+{
+"en": "Can I have a medical report for my insurance?",
+"ref": "¿Me da un informe médico para mi seguro?",
+"out": "¿Me puede dar un informe médico para mi seguro?"
+},
+{
+"en": "The ATM didn't give me the money.",
+"ref": "El cajero no me dio el dinero.",
+"out": "El cajero no me dio el dinero."
+},
+{
+"en": "Please feed the cat.",
+"ref": "Dele de comer al gato, por favor.",
+"out": "Por favor, dele de comer al gato."
+},
+{
+"en": "I need a bank trust.",
+"ref": "Necesito un fideicomiso.",
+"out": "Necesito un fideicomiso bancario."
+},
+{
+"en": "I need a new floor cloth.",
+"ref": "Necesito una jerga nueva.",
+"out": "Necesito una jerga nueva."
+},
+{
+"en": "What supplies do you need?",
+"ref": "¿Qué productos necesita?",
+"out": "¿Qué suministros necesita?"
+},
+{
+"en": "Would you like to round up?",
+"ref": "¿Redondea?",
+"out": "¿Le gustaría redondear?"
+},
+{
+"en": "It's across from the Oxxo.",
+"ref": "Es enfrente del Oxxo.",
+"out": "Está frente al Oxxo."
+},
+{
+"en": "Would you like a coffee or a glass of water?",
+"ref": "¿Gusta un café o un vaso de agua?",
+"out": "¿Le gustaría un café o un vaso de agua?"
+},
+{
+"en": "You need stitches.",
+"ref": "Necesita puntadas.",
+"out": "Usted necesita puntadas."
+},
+{
+"en": "Do you have bigger / smaller ones?",
+"ref": "¿Tienen más grandes / más chicas?",
+"out": "¿Tiene unos más grandes / más chicos?"
+},
+{
+"en": "A still water",
+"ref": "Un agua natural",
+"out": "Un agua sin gas"
+},
+{
+"en": "How much should I put in?",
+"ref": "¿Cuánto le cargo?",
+"out": "¿Cuánto debo poner?"
+},
+{
+"en": "The gas ran out.",
+"ref": "Se acabó el gas.",
+"out": "Se me acabó la gasolina."
+},
+{
+"en": "It gets up to two meters",
+"ref": "Llega a medir dos metros",
+"out": "Llega a medir hasta dos metros"
+},
+{
+"en": "Do you have something for…?",
+"ref": "¿Tiene algo para…?",
+"out": "¿Tiene algo para…?"
+},
+{
+"en": "I want to set up electricity.",
+"ref": "Quiero contratar la luz.",
+"out": "Quiero contratar la electricidad."
+},
+{
+"en": "For here",
+"ref": "Para aquí",
+"out": "Para aquí"
+},
+{
+"en": "Anything else?",
+"ref": "¿Algo más?",
+"out": "¿Algo más?"
+},
+{
+"en": "Hello",
+"ref": "Hola",
+"out": "Hola"
+},
+{
+"en": "Where's a currency exchange?",
+"ref": "¿Dónde hay una casa de cambio?",
+"out": "¿Dónde hay una casa de cambio?"
+},
+{
+"en": "What's the asking price?",
+"ref": "¿Cuánto piden?",
+"out": "¿Cuál es el precio de venta?"
+},
+{
+"en": "How are we going to handle this?",
+"ref": "¿Cómo le hacemos?",
+"out": "¿Cómo vamos a manejar esto?"
+},
+{
+"en": "Can you ring me up, please?",
+"ref": "¿Me cobra, por favor?",
+"out": "¿Me puede cobrar, por favor?"
+},
+{
+"en": "What would you like me to do today?",
+"ref": "¿Qué quiere que haga hoy?",
+"out": "¿Qué le gustaría que hiciera hoy?"
+},
+{
+"en": "To the right / to the left",
+"ref": "A la derecha / a la izquierda",
+"out": "A la derecha / a la izquierda"
+},
+{
+"en": "Another one, please",
+"ref": "Otra, por favor",
+"out": "Otra, por favor"
+},
+{
+"en": "It's a rental car.",
+"ref": "Es un coche rentado.",
+"out": "Es un coche de alquiler."
+},
+{
+"en": "Please wash the dishes.",
+"ref": "Lave los trastes, por favor.",
+"out": "Por favor, lave los trastes."
+},
+{
+"en": "Mix it with volcanic gravel",
+"ref": "Revuélvala con tezontle",
+"out": "Mézclelo con tezontle"
+},
+{
+"en": "How far is the next one?",
+"ref": "¿Qué tan lejos está la siguiente?",
+"out": "¿Qué tan lejos está el siguiente?"
+},
+{
+"en": "Take off your shirt.",
+"ref": "Quítese la camisa.",
+"out": "Quítese la camisa."
+},
+{
+"en": "What's the dollar rate?",
+"ref": "¿A cómo está el dólar?",
+"out": "¿Cuál es el tipo de cambio del dólar?"
+},
+{
+"en": "Does it have a building permit?",
+"ref": "¿Tiene licencia de construcción?",
+"out": "¿Tiene permiso de construcción?"
+}
+]

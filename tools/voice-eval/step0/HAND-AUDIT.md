@@ -50,3 +50,20 @@ animal bite, and in Mexico it is also slang for a bribe.
 
 Row 193's reference is *Es un coche rentado* (*coche* is the Spain word), and row 77 says
 *auto rentado* for the same English. More evidence the phrasebook needs its native review.
+
+## Second round (same day): fixed prompt (`mt_workers_llm_v2.py` SYS) via `mt_chat_api.py`
+
+- **gpt-5, reasoning low** (`gpt5_out.json`): tú 1 (133 *Si tienes hambre, sírvete*). Spain 0.
+  Meaning errors 0. Soft: 19 *pequeño*. Mexican wins: 73 *pasar corriente*, 140 *contacto*,
+  112 *gripa*, 182 *contratar la luz*, 77/193 *carro de renta*.
+- **gpt-5, reasoning minimal** (`gpt5min_out.json`): tú 1 (92 *¡Que te vaya bien!*). Spain 2
+  (77 *coche de renta*, 193 *coche de alquiler*). Meaning errors 0. Soft: 112 *resfriado*.
+- **gpt-5-mini, reasoning low** (`gpt5mini_out.json`): tú 0. Spain 1 (24 *día por medio*). Soft:
+  77/193 *de alquiler/de renta*, 112 *resfriado*, 19/75/176 *pequeño*. Meaning errors 2:
+  78 *¿Se hace llamar Akumal?*, 177 *un agua quieta*.
+- **grok-4.3** (`grok_out.json`, fallback key): tú 1 (92). Spain 0. Soft: 112 *resfriado*,
+  111 *camión de agua*. Meaning error 1: 165 *empastes* (dental fillings). About 20 rows carry a
+  redundant *Yo* / *usted* (23 55 63 65 91 99 105 108 111 123 138 159 169 170 182…).
+- Excluded again: 156 *¿Cómo te va?* (casual greeting). Scorer false positive: 33 *¿Me trae…?* is usted.
+- Row 0: gpt-5 and gpt-5-mini say *mordedura*/*mordida*; grok says *picadura*. None says *piquete*.
+- Row 175: the reference *puntadas* is itself doubtful; *puntos* (gpt-5) is the medical word.

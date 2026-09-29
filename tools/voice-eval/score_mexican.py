@@ -35,7 +35,7 @@ def score(rows,key):
         if sp or badtu: lines.append(f"{i:3d} {'SP '+','.join(sp) if sp else '':22s} {'TU '+','.join(to) if badtu else '':20s} | {r['en']} || {o} || ref: {r['ref']}")
     return ns,nt,lines
 if __name__=='__main__':
-    for f,key in [('google_out.json','google'),('llama_out.json','out'),('gptoss_out.json','out'),('mistral_out.json','out')]:
+    for f,key in [('google_out.json','google')]+[(t+'_out.json','out') for t in ('llama','gptoss','mistral','gpt5mini','gpt5','gpt5min','grok')]:
         try: rows=json.load(open(f))
         except Exception: continue
         ns,nt,lines=score(rows,key)

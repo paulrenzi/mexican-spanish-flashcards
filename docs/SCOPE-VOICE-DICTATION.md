@@ -173,6 +173,46 @@ Counts are per phrase, out of 200, against the curated text. Automatic count
   row and *auto rentado* in another. The *tú* count is the robust one: it is grammar, not taste.
   The word counts need the native review before anyone quotes them.
 
+## 3b. Which service is best for Mexican Spanish (measured 2026-09-29, same 200 phrases)
+
+The prompt is the fixed one from `mt_workers_llm_v2.py`: the input is fenced, with "translate,
+never answer, keep the same speaker", plus the same word list. It was sent through
+`tools/voice-eval/mt_chat_api.py` to the two other LLM vendors whose keys are in the portfolio
+(`triumvirate/.env`). There is no DeepL or Microsoft Translator key anywhere, so those are
+unmeasured. The latency figure is the median of 10 sequential calls from oracle-vm.
+
+| | **tú slips** | **Spain / other-region** | **Meaning errors** | **Answered instead of translating** | **Latency** |
+|---|---|---|---|---|---|
+| Google Translate (§3a) | 61 | 8 | 10 | 0 | fast |
+| gpt-oss-120b, Workers AI (§3a, old prompt) | 1 | 2 | 3 | 3 | — |
+| **OpenAI gpt-5, reasoning low** | **1** (#133) | **0** | **0** | **0** | 2.4 s |
+| **OpenAI gpt-5, reasoning minimal** | 1 (#92) | 2 (#77, #193 *coche*) | 0 | 0 | **0.9 s** |
+| OpenAI gpt-5-mini, reasoning low | 0 | 1 (*día por medio*) + soft *de alquiler*, *resfriado*, *pequeño* | 2 (#78 *¿Se hace llamar Akumal?*, #177 *agua quieta*) | 0 | 1.9 s (0.7 s minimal) |
+| xAI grok-4.3 | 1 (#92) | soft only (*resfriado*, *camión de agua*) | 1 (#165 *empastes*, dental fillings, for taco fillings) | 0 | 5.0 s |
+
+**Answer: OpenAI gpt-5 with the Mexican instruction and the phrasebook word list.** It is the only
+system with zero meaning errors and zero Spain words, and it often lands on the Mexican phrasing
+the reference uses: *¿Me puede pasar corriente?*, *Este contacto no sirve*, *¿Tiene algo para la
+gripa?*, *carro de renta*, *Quiero contratar la luz*. At reasoning `minimal` it drops to 0.9 s and
+loses a little: *coche* twice and one *te*. For a voice app, `minimal` plus the curated glossary
+layer is the practical setting. The fixed prompt stopped every model answering the sentence,
+where gpt-oss had done it 3 times under the old prompt.
+- **Every model still says *mordedura/mordida*** for the insect bite except grok, which says
+  *picadura*. Only the glossary layer gets *piquete*.
+- **Grok** adds a stilted *Yo…* / *usted* to about 20 rows (*Yo quiero abrir una cuenta*). That is
+  not wrong, but it is unnatural. It is also the slowest, and **the primary `XAI_API_KEY` is out of credits**
+  (`permission-denied: … used all available credits or reached its monthly spending limit`).
+  These runs used the fallback key.
+- **Cost:** 200 phrases used 311k input and 3–22k output tokens per run, mostly the 1.5k-token word
+  list repeated. That is about a fifth of a cent per phrase on gpt-5 at list prices (quoted from memory,
+  not checked), and less with prompt caching. The whole comparison cost roughly $2.
+- **Architecture consequence.** The phone calls our Worker, and the Worker calls OpenAI with the key as
+  a Worker secret. **This uses no Workers AI neurons, so it does not need Workers Paid.** Worker
+  requests are a separate allowance: 100k/day free, and the account used 4,276 on 2026-09-29.
+  **v1 speech-to-text is still planned on Workers AI Whisper, which does spend neurons.** That
+  choice is open again: either take Workers Paid for Whisper, or use OpenAI's transcription for
+  STT as well. The latter is unmeasured against §2.
+
 ## 4. Download size and speed on an iPhone
 
 | Offline v2 bundle | Size |
@@ -219,9 +259,11 @@ shell in §4 (its Spanish variant is unchecked).
 
 **Open, before anything final:**
 0. ✅ **Measured 2026-09-29, §3a.** Google puts tú on the listener in 61 of about 64 phrases.
-   The v1 candidate (gpt-oss-120b + instruction + word list) does it once. Still open from it:
-   (a) run `mt_workers_llm_v2.py` (the prompt fix) once the neuron allowance resets or Workers
-   Paid is on; (b) a native speaker re-checks `step0/HAND-AUDIT.md` and `phrases.js`.
+   The v1 candidate (gpt-oss-120b + instruction + word list) does it once. **§3b then measured
+   OpenAI and xAI with the fixed prompt: gpt-5 is the best service** (0 Spain words, 0 meaning
+   errors, 0.9 s at minimal reasoning). Still open: (a) Paul picks gpt-5 via a Worker proxy
+   (no Workers Paid needed) or stays on Workers AI (needs Workers Paid); (b) a native speaker
+   re-checks `step0/HAND-AUDIT.md` and `phrases.js`.
 1. **Paul's recordings.** 30–50 short clips in the app's situations (taxi, pharmacy, mechanic,
    bank), recorded with permission, each with a note of what was actually said.
    `tools/voice-eval/` scores them unchanged. This is the only test of "better than Google
