@@ -1,5 +1,5 @@
 // mx-voice: the public half of voice dictation.
-//   POST /stt?lang=es|en   body = 16 kHz mono WAV (the page converts)  -> {text}
+//   POST /stt?lang=es|en   body = the browser's own recording (the origin decodes it) -> {text}
 //   POST /translate        {"text", "from": "en"|"es"}                   -> {text, ms}
 // Both forward to the oracle-vm origin with the shared secret, over the ORIGIN binding (Workers VPC -> Cloudflare Tunnel
 // mx-voice-origin -> 127.0.0.1:8791; the origin has no public hostname): /stt runs Parakeet on its CPU (free, no quota),
@@ -30,7 +30,8 @@ async function stt(req, env, url) {
   if (lang !== "es" && lang !== "en") return json(req, 400, { error: "lang must be es or en" });
   const buf = await req.arrayBuffer();
   if (!buf.byteLength || buf.byteLength > MAX_AUDIO) return json(req, 413, { error: "audio empty or longer than ~30 s" });
-  return forward(req, env, "/stt?lang=" + lang, "audio/wav", buf);
+  const type = (req.headers.get("Content-Type") || "application/octet-stream").slice(0, 100);
+  return forward(req, env, "/stt?lang=" + lang, type, buf);
 }
 
 async function forward(req, env, path, type, body) {

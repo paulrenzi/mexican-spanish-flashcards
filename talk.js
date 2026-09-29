@@ -95,27 +95,8 @@
     if (from === "en") window.oraleSpeak(es);
   }
 
-  // ---------- Recording -> 16 kHz mono WAV (so the server never has to guess the phone's audio format) ----------
+  // ---------- Recording: sent as the browser made it (Safari mp4, Chrome webm); the server decodes it ----------
   let rec = null;
-  async function toWav(blob) {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    const ctx = new Ctx();
-    const buf = await ctx.decodeAudioData(await blob.arrayBuffer());
-    ctx.close?.();
-    const len = Math.ceil(buf.duration * 16000);
-    const off = new OfflineAudioContext(1, len, 16000);
-    const src = off.createBufferSource();
-    src.buffer = buf; src.connect(off.destination); src.start();
-    const pcm = (await off.startRendering()).getChannelData(0);
-    const out = new DataView(new ArrayBuffer(44 + pcm.length * 2));
-    const str = (o, s) => [...s].forEach((c, i) => out.setUint8(o + i, c.charCodeAt(0)));
-    str(0, "RIFF"); out.setUint32(4, 36 + pcm.length * 2, true); str(8, "WAVEfmt ");
-    out.setUint32(16, 16, true); out.setUint16(20, 1, true); out.setUint16(22, 1, true);
-    out.setUint32(24, 16000, true); out.setUint32(28, 32000, true); out.setUint16(32, 2, true); out.setUint16(34, 16, true);
-    str(36, "data"); out.setUint32(40, pcm.length * 2, true);
-    pcm.forEach((v, i) => out.setInt16(44 + i * 2, Math.max(-1, Math.min(1, v)) * 0x7fff, true));
-    return new Blob([out], { type: "audio/wav" });
-  }
 
   function setRecording(from) {
     document.querySelectorAll(".mic").forEach((b) => {
@@ -137,20 +118,21 @@
     const chunks = [];
     const mr = new MediaRecorder(stream);
     const li = addTurn(from);
+    const began = Date.now();
     rec = { mr, from, li, timer: setTimeout(stop, MAX_SECONDS * 1000) };
     mr.ondataavailable = (e) => e.data.size && chunks.push(e.data);
     mr.onstop = async () => {
       stream.getTracks().forEach((t) => t.stop());
+      const audio = new Blob(chunks, { type: mr.mimeType || "audio/mp4" });
+      if (Date.now() - began < 600 || !audio.size) return setError(li, "That was too short. Tap, speak, then tap again.");
       setWait(li, "Writing it down…");
-      let wav;
-      try { wav = await toWav(new Blob(chunks, { type: mr.mimeType })); }
-      catch { return setError(li, "Couldn't read the recording. Try again."); }
-      if (wav.size < 44 + 16000 * 2 * 0.3) return setError(li, "That was too short. Tap, speak, then tap again.");
       let r, d;
-      try { r = await fetch(`${API}/stt?lang=${from}`, { method: "POST", body: wav }); d = await r.json(); }
+      try { r = await fetch(`${API}/stt?lang=${from}`, { method: "POST", headers: { "Content-Type": audio.type }, body: audio }); d = await r.json(); }
       catch { return setError(li, "No connection to speech-to-text."); }
       if (!r.ok) return setError(li, why(d, "Speech-to-text failed. Try again."));
-      if (!d.text) return setError(li, "Didn't catch anything. Try again, a little closer to the phone.");
+      if (!d.text) return setError(li, d.peak < 0.01
+        ? "The microphone sent silence. Check that no other app is using it, then try again."
+        : "Didn't catch anything. Try again, a little closer to the phone.");
       await handleText(d.text, from, li);
     };
     mr.start();

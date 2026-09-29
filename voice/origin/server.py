@@ -1,6 +1,6 @@
 """Speech-to-text and translation origin for voice dictation.
 
-POST /stt?lang=es|en  body = 16 kHz mono 16-bit WAV    ->  {"text": "...", "ms": 123}
+POST /stt?lang=es|en  body = the browser's own recording (mp4/webm/wav; ffmpeg decodes it)  ->  {"text": "...", "ms": 123}
 POST /translate  {"text": "...", "from": "en"|"es"}  ->  {"text": "...", "ms": 1234}
 Header X-Origin-Secret must match ORIGIN_SECRET. Only the Cloudflare Worker knows it.
 
@@ -12,7 +12,7 @@ Every translation is one `claude -p --model opus --effort low` call on the Max p
 with every ANTHROPIC_* variable stripped from the child env so the paid API can never be used.
 The en->es prompt is the one measured in tools/voice-eval/mt_workers_llm_v2.py (step0, §3b).
 """
-import hmac, io, json, os, pathlib, subprocess, threading, time, wave
+import hmac, json, os, pathlib, subprocess, tempfile, threading, time
 
 import numpy as np
 import onnx_asr
@@ -26,7 +26,8 @@ MAX_CHARS = 400
 SLOTS = threading.BoundedSemaphore(int(os.environ.get("SLOTS", "2")))
 ENV = {k: v for k, v in os.environ.items() if not k.startswith("ANTHROPIC_")}
 ENV.pop("ORIGIN_SECRET", None)
-MAX_AUDIO = 1_000_000  # ~30 s of 16 kHz mono 16-bit WAV
+MAX_AUDIO = 1_000_000  # ~30 s of 16 kHz mono 16-bit WAV; a phone's AAC is far smaller
+EMPTY_DIR = pathlib.Path("/tmp/mx-voice-empty")  # clips that came back blank, kept for diagnosis (last 20)
 ASR = onnx_asr.load_model("nemo-parakeet-tdt-0.6b-v3", quantization="int8")
 ASR_LOCK = threading.Lock()  # one transcription at a time keeps all 4 cores on it
 
@@ -50,13 +51,29 @@ SYS = {
 ASK = {"en": "Translate this into Mexican Spanish:\n<<<{}>>>", "es": "Translate this into English:\n<<<{}>>>"}
 
 
-def transcribe(data):
-    w = wave.open(io.BytesIO(data))
-    if w.getframerate() != 16000 or w.getnchannels() != 1 or w.getsampwidth() != 2:
-        raise ValueError("need 16 kHz mono 16-bit WAV")
-    a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+def decode(data):
+    """Any browser recording -> 16 kHz mono float32. Decoding here, not in the page, because Safari's
+    in-page decode of its own MediaRecorder mp4 is the step that never worked on an iPhone."""
+    with tempfile.NamedTemporaryFile(suffix=".audio") as f:
+        f.write(data)
+        f.flush()
+        p = subprocess.run(["ffmpeg", "-v", "error", "-i", f.name, "-ac", "1", "-ar", "16000", "-f", "s16le", "-"],
+                           capture_output=True, timeout=30)
+    if p.returncode or not p.stdout:
+        raise ValueError("ffmpeg: " + p.stderr.decode(errors="replace")[-200:])
+    return np.frombuffer(p.stdout, dtype=np.int16).astype(np.float32) / 32768
+
+
+def transcribe(a):
     with ASR_LOCK:
         return ASR.recognize(a, sample_rate=16000).strip()
+
+
+def keep_empty(data, ctype):
+    EMPTY_DIR.mkdir(exist_ok=True)
+    (EMPTY_DIR / f"{time.strftime('%Y%m%d-%H%M%S')}-{ctype.replace('/', '_').split(';')[0]}").write_bytes(data)
+    for old in sorted(EMPTY_DIR.iterdir())[:-20]:
+        old.unlink()
 
 
 def translate(text, src):
@@ -114,15 +131,21 @@ class H(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length") or 0)
         if not n or n > MAX_AUDIO:
             return self.reply(413, {"error": "audio empty or longer than ~30 s"})
+        data, ctype = self.rfile.read(n), self.headers.get("Content-Type", "?")
         t = time.time()
         try:
-            out = transcribe(self.rfile.read(n))
+            a = decode(data)
+            out = transcribe(a)
         except Exception as e:
-            self.log_message("stt failed: %s", e)
+            self.log_message("stt failed (%s, %d bytes): %s", ctype, n, e)
             return self.reply(400, {"error": "stt_failed"})
         ms = int((time.time() - t) * 1000)
-        self.log_message("stt %s %d bytes %d ms", query, n, ms)
-        self.reply(200, {"text": out, "ms": ms})
+        peak = float(np.abs(a).max()) if a.size else 0.0
+        self.log_message("stt %s %s %d bytes %.1f s peak %.3f %d ms%s", query, ctype, n, a.size / 16000, peak, ms,
+                         "" if out else " EMPTY")
+        if not out:
+            keep_empty(data, ctype)
+        self.reply(200, {"text": out, "ms": ms, "seconds": round(a.size / 16000, 1), "peak": round(peak, 3)})
 
 
 if __name__ == "__main__":

@@ -4,6 +4,20 @@
 that adds this file. **Supersedes** `docs/HANDOFF-VOICE-DICTATION-BUILD-20260929.md` (the build plan).
 The authority is still `docs/SCOPE-VOICE-DICTATION.md` §1 / §3b.
 
+## Update 3, same day: the iPhone got silence, so the server decodes audio now
+
+- **Paul's first iPhone test failed.** Every recording came back "Didn't catch anything". The origin log showed 5.4 s and 3.7 s
+  WAVs arriving and Parakeet returning nothing. The page's own Safari decode (MediaRecorder mp4 → `decodeAudioData` →
+  WAV) was the untested step, and it was handing over audio that could not be recognised.
+- **The fix removes that step.** The page now POSTs the browser's own recording (Safari mp4/AAC, Chrome webm/Opus) with
+  its Content-Type, and the Worker passes it through. The origin decodes it with `ffmpeg` to 16 kHz mono.
+- **Diagnosis is built in.** Each `/stt` logs its type, seconds and **peak level**, and replies with `seconds`/`peak`.
+  A blank result is kept in `/tmp/mx-voice-empty/` (last 20). The page says "the microphone sent silence" when the peak is below 0.01.
+- **Verified:**
+  - A fragmented AAC mp4 (Safari's format) and a webm, each through the live Worker, came back with the right Spanish.
+  - `render_check` passes.
+  - The iPhone itself still needs a re-test.
+
 ## Update 2, same day: CONNECTED — live end to end (Paul approved the tunnel)
 
 - **Cloudflare Tunnel `mx-voice-origin`** (`4ed33014-55be-44e2-a2f0-1b04204ffe44`, remotely managed) runs as systemd

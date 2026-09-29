@@ -127,7 +127,7 @@ try:
         check(bg == "rgb(15, 17, 18)", f"dark mode follows the phone (bg {bg})")
         dp.screenshot(path=str(OUT / "6-dark.png"))
 
-        # Talk: the Worker is mocked here; the fake Chromium mic records a tone, the page converts it to WAV.
+        # Talk: the Worker is mocked here; the fake Chromium mic records a tone, the page posts the recording as-is.
         tc = b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True,
                            has_touch=True, permissions=["microphone"])
         tp = tc.new_page()
@@ -164,8 +164,8 @@ try:
         tp.wait_for_timeout(1500)
         tp.click(".mic[data-from=es]")
         tp.wait_for_selector(".turn .t-es")
-        check(bool(seen["stt"]) and "lang=es" in seen["stt"][0][0] and seen["stt"][0][1] == b"RIFF" and seen["stt"][0][2] > 30000,
-              f"recording is posted to /stt as WAV ({seen['stt'][:1] and seen['stt'][0][1:]})")
+        check(bool(seen["stt"]) and "lang=es" in seen["stt"][0][0] and seen["stt"][0][1] == bytes.fromhex("1a45dfa3") and seen["stt"][0][2] > 1000,
+              f"recording is posted to /stt as the browser's own webm ({seen['stt'][:1] and seen['stt'][0][1:]})")
         check(tp.inner_text(".turn .t-en") == "I have a bite that looks infected.", "Spanish speech is answered from the phrasebook")
         check(tp.inner_text(".turn .t-src") == "From the phrasebook" and not seen["translate"], "phrasebook match skips the model")
 
