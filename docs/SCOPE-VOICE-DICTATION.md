@@ -190,6 +190,7 @@ unmeasured. The latency figure is the median of 10 sequential calls from oracle-
 | OpenAI gpt-5-mini, reasoning low | 0 | 1 (*día por medio*) + soft *de alquiler*, *resfriado*, *pequeño* | 2 (#78 *¿Se hace llamar Akumal?*, #177 *agua quieta*) | 0 | 1.9 s (0.7 s minimal) |
 | xAI grok-4.3 | 1 (#92) | soft only (*resfriado*, *camión de agua*) | 1 (#165 *empastes*, dental fillings, for taco fillings) | 0 | 5.0 s |
 | **Claude Opus 5.5** (`claude -p`, Max plan) | **0** | **0** (soft: *resfriado*) | **0** | **0** | 4.8 s* |
+| **Claude Opus 5.5, effort low** (`claude -p --effort low`, Max plan) | **0** | **0** | **0** | **0** | 3.7 s* |
 | Claude Sonnet 5.5 (`claude -p`, Max plan) | 0 | 1 (#193 *coche*) + soft *resfriado*, *camión de agua* | 3 (#44 *curso* for a course of antibiotics, **plus a stray "Correction: …" note left in the output**; #73 *darme pasa corriente*; #177 *agua quieta*) | 0 | 4.5 s* |
 
 \* Measured through the `claude` CLI, which adds its own start-up time to every call, so this is not
@@ -202,6 +203,23 @@ está el dólar?*, *¿Cómo le vamos a hacer con esto?*, *media sombra*, *carro 
 non-technical users (Paul, 2026-09-29), so there is no Tailscale on the phone. A Max subscription is
 for one person, so it cannot back a public service; that would need the paid Anthropic API, which is
 banned. Using Opus here is Paul's call to reopen.
+
+**DECISION (Paul, 2026-09-29): Cloudflare + Claude Opus 5.5 at effort low.** Runs on the Max plan
+through `claude -p` while the app is a prototype; **switch to the Anthropic API when it becomes a
+production app** (Paul: "it's nowhere near that yet"). The standing no-API rule is untouched until then.
+- **Opus low vs default, same 200 phrases:** both are 0 / 0 / 0 / 0. 39 rows differ; none is a
+  meaning error. Low is often *more* Mexican: *Cada tercer día*, *Me da…*, *¿Gusta un café…?*,
+  *Ya se acabó el cloro*, *licencia de construcción*, all matching the reference. It loses a little
+  elsewhere: *¿Cómo vamos a manejar esto?* (a calque, where default had *¿Cómo le vamos a hacer?*),
+  *Sombra parcial* for *media sombra*, and *refrigerador* for *refri*. Median 3.7 s against 4.8 s,
+  both including CLI start-up. Output: `step0/opuslow_out.json`.
+- **Shape:** phone → a public Cloudflare Worker (no Tailscale on the phone) → an origin running
+  `claude -p --model opus --effort low` with `ANTHROPIC_*` stripped. The Worker holds a shared secret
+  for the origin and applies a per-user rate limit. The origin is the always-on oracle VM, where the
+  CLI is logged in; the Worker reaches it over HTTPS or a Cloudflare Tunnel. Speech-to-text stays on
+  Workers AI Whisper (§1).
+- **Limit to remember:** a Max plan is for one person, so this cannot carry public traffic. That is
+  the trigger for the API switch.
 
 **Best that the rules allow today: OpenAI gpt-5 with the Mexican instruction and the phrasebook word list.**
 It has zero meaning errors and zero Spain words, and it often lands on the Mexican phrasing
@@ -274,8 +292,8 @@ shell in §4 (its Spanish variant is unchecked).
 0. ✅ **Measured 2026-09-29, §3a.** Google puts tú on the listener in 61 of about 64 phrases.
    The v1 candidate (gpt-oss-120b + instruction + word list) does it once. **§3b then measured
    OpenAI and xAI with the fixed prompt: gpt-5 is the best service** (0 Spain words, 0 meaning
-   errors, 0.9 s at minimal reasoning). Still open: (a) Paul picks gpt-5 via a Worker proxy
-   (no Workers Paid needed) or stays on Workers AI (needs Workers Paid); (b) a native speaker
+   errors, 0.9 s at minimal reasoning). (a) ✅ **Decided 2026-09-29: Cloudflare Worker + Opus 5.5 at effort low on the Max plan,
+   the Anthropic API at production (§3b).** Still open: (b) a native speaker
    re-checks `step0/HAND-AUDIT.md` and `phrases.js`.
 1. **Paul's recordings.** 30–50 short clips in the app's situations (taxi, pharmacy, mechanic,
    bank), recorded with permission, each with a note of what was actually said.

@@ -6,7 +6,7 @@ ENV={k:v for k,v in os.environ.items() if not k.startswith('ANTHROPIC_')}
 LAT=[]
 def call(model,text):
     cmd=['claude','-p','--model',model,'--system-prompt',SYS,'--tools','','--output-format','json',
-         '--setting-sources','','Translate this into Mexican Spanish:\n<<<'+text+'>>>']
+         '--setting-sources','',*(['--effort',os.environ['EFFORT']] if os.environ.get('EFFORT') else []),'Translate this into Mexican Spanish:\n<<<'+text+'>>>']
     for a in range(3):
         t=time.time(); p=subprocess.run(cmd,capture_output=True,text=True,env=ENV,timeout=300,cwd='/tmp')
         try:
