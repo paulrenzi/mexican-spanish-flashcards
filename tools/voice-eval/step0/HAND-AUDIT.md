@@ -67,3 +67,18 @@ Row 193's reference is *Es un coche rentado* (*coche* is the Spain word), and ro
 - Excluded again: 156 *¿Cómo te va?* (casual greeting). Scorer false positive: 33 *¿Me trae…?* is usted.
 - Row 0: gpt-5 and gpt-5-mini say *mordedura*/*mordida*; grok says *picadura*. None says *piquete*.
 - Row 175: the reference *puntadas* is itself doubtful; *puntos* (gpt-5) is the medical word.
+
+## Third round: Claude Sonnet 5.5 and Opus 5.5 via `claude -p` on the Max plan (2026-09-29)
+
+Same prompt and the same 200 phrases, run through `tools/voice-eval/mt_claude_cli.py`. ANTHROPIC_* was stripped from the environment, so no paid API was used. The automatic scorer found 0 Spain words and 0 tú slips for both.
+
+- **Opus 5.5: nothing to flag.** Soft: 112 *resfriado*. It is the closest of any system to the reference idiom: 10 *¿Pica?*, 111 *pipa de agua*, 194 *trastes*, 198 *¿A cómo está el dólar?*, 188 *¿Cómo le vamos a hacer con esto?*, 136 *media sombra*.
+- **Sonnet 5.5: 3 meaning errors.**
+  - 44 *Termine todo el curso*: the English means a course of treatment. The output also contains a stray note, "Correction: with proper accents…", so the output itself is unusable.
+  - 73 *¿Puede darme pasa corriente?* is ungrammatical.
+  - 177 *Agua quieta* (the same error gpt-5-mini made).
+- **Sonnet 5.5, Spain word:** 193 *coche*, counted the same way as it was for gpt-5 minimal.
+- **Sonnet 5.5, soft:** 111 *camión de agua*, 112 *resfriado*.
+- **Sonnet 5.5, style:** a redundant *usted* in about 8 rows (8 68 78 84 88 97 121 171).
+- Row 0 is unchanged: both say *picadura*, and neither says *piquete*.
+- Latency: 4.5 s (Sonnet) and 4.8 s (Opus) median. This includes CLI start-up, so it is not the API latency.

@@ -189,9 +189,22 @@ unmeasured. The latency figure is the median of 10 sequential calls from oracle-
 | **OpenAI gpt-5, reasoning minimal** | 1 (#92) | 2 (#77, #193 *coche*) | 0 | 0 | **0.9 s** |
 | OpenAI gpt-5-mini, reasoning low | 0 | 1 (*día por medio*) + soft *de alquiler*, *resfriado*, *pequeño* | 2 (#78 *¿Se hace llamar Akumal?*, #177 *agua quieta*) | 0 | 1.9 s (0.7 s minimal) |
 | xAI grok-4.3 | 1 (#92) | soft only (*resfriado*, *camión de agua*) | 1 (#165 *empastes*, dental fillings, for taco fillings) | 0 | 5.0 s |
+| **Claude Opus 5.5** (`claude -p`, Max plan) | **0** | **0** (soft: *resfriado*) | **0** | **0** | 4.8 s* |
+| Claude Sonnet 5.5 (`claude -p`, Max plan) | 0 | 1 (#193 *coche*) + soft *resfriado*, *camión de agua* | 3 (#44 *curso* for a course of antibiotics, **plus a stray "Correction: …" note left in the output**; #73 *darme pasa corriente*; #177 *agua quieta*) | 0 | 4.5 s* |
 
-**Answer: OpenAI gpt-5 with the Mexican instruction and the phrasebook word list.** It is the only
-system with zero meaning errors and zero Spain words, and it often lands on the Mexican phrasing
+\* Measured through the `claude` CLI, which adds its own start-up time to every call, so this is not
+the model's API latency. The API is unmeasured: the paid Anthropic API is banned in this portfolio.
+
+**Best quality: Claude Opus 5.5.** It is the only system with zero on every column, and it is the
+closest to the reference's own Mexican idiom: *¿Pica?*, *pipa de agua*, *lave los trastes*, *¿A cómo
+está el dólar?*, *¿Cómo le vamos a hacer con esto?*, *media sombra*, *carro rentado*.
+**But it cannot serve this app as the rules stand.** The app is meant to be public, for
+non-technical users (Paul, 2026-09-29), so there is no Tailscale on the phone. A Max subscription is
+for one person, so it cannot back a public service; that would need the paid Anthropic API, which is
+banned. Using Opus here is Paul's call to reopen.
+
+**Best that the rules allow today: OpenAI gpt-5 with the Mexican instruction and the phrasebook word list.**
+It has zero meaning errors and zero Spain words, and it often lands on the Mexican phrasing
 the reference uses: *¿Me puede pasar corriente?*, *Este contacto no sirve*, *¿Tiene algo para la
 gripa?*, *carro de renta*, *Quiero contratar la luz*. At reasoning `minimal` it drops to 0.9 s and
 loses a little: *coche* twice and one *te*. For a voice app, `minimal` plus the curated glossary
