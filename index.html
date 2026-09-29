@@ -26,6 +26,7 @@
     <div class="modes" role="tablist" aria-label="View">
       <button class="mode active" data-mode="list" role="tab" aria-selected="true">Phrases</button>
       <button class="mode" data-mode="cards" role="tab" aria-selected="false">Practice</button>
+      <button class="mode" data-mode="talk" role="tab" aria-selected="false">Talk</button>
     </div>
   </header>
 
@@ -91,6 +92,21 @@
     <p class="foot">Tap a topic to open it · speaker plays it aloud · expand shows it big for the staff · works offline</p>
   </main>
 
+  <main id="talkView" class="hidden">
+    <div class="mics">
+      <button class="mic" data-from="en" data-hint="Tap, speak English"><span class="m-flag">🇺🇸</span><span class="m-name">I speak</span><span class="m-hint">Tap, speak English</span></button>
+      <button class="mic" data-from="es" data-hint="Toque y hable español"><span class="m-flag">🇲🇽</span><span class="m-name">They speak</span><span class="m-hint">Toque y hable español</span></button>
+    </div>
+    <div class="type-row">
+      <input type="text" id="talkText" placeholder="Or type it" autocomplete="off" aria-label="Type something to translate">
+      <button class="type-go" data-type-from="en" aria-label="Translate from English">🇺🇸→</button>
+      <button class="type-go" data-type-from="es" aria-label="Translate from Spanish">🇲🇽→</button>
+    </div>
+    <p class="talk-empty" id="talkEmpty">Say something in English and it comes out in Mexican Spanish, spoken aloud. Tap 🇲🇽 to hear what they say back in English.</p>
+    <ul class="turns" id="turns"></ul>
+    <p class="foot">Needs a connection · phrasebook phrases are matched first · everything else is translated by Claude</p>
+  </main>
+
   <nav class="cats" id="cats" aria-label="Situations"></nav>
 
   <div class="show hidden" id="show" role="dialog" aria-label="Phrase shown large">
@@ -101,5 +117,6 @@
 
   <script src="phrases.js"></script>
   <script src="app.js"></script>
+  <script src="talk.js"></script>
 </body>
 </html>

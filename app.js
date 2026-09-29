@@ -43,6 +43,7 @@
     u.rate = 0.85;
     speechSynthesis.speak(u);
   }
+  window.oraleSpeak = speak;
 
   // ---------- Categories ----------
   function renderCats() {
@@ -317,6 +318,8 @@
       });
       $("cardsView").classList.toggle("hidden", state.mode !== "cards");
       $("listView").classList.toggle("hidden", state.mode !== "list");
+      $("talkView").classList.toggle("hidden", state.mode !== "talk");
+      document.body.classList.toggle("talking", state.mode === "talk");
     }));
 
   if (!catById[state.cat]) state.cat = "garden";

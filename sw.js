@@ -1,6 +1,6 @@
 // Network first so updates show up immediately; fall back to cache when offline.
-const CACHE = "orale-v6";
-const FILES = ["./", "index.html", "style.css", "app.js", "phrases.js", "icon.svg", "manifest.webmanifest"];
+const CACHE = "orale-v7";
+const FILES = ["./", "index.html", "style.css", "app.js", "talk.js", "phrases.js", "icon.svg", "manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)));

@@ -1,0 +1,15 @@
+[Unit]
+Description=mx-voice translation origin (claude -p on the Max plan)
+After=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/repos/mexican-spanish-flashcards/voice/origin
+EnvironmentFile=/home/ubuntu/.config/mx-voice/origin.env
+Environment=PATH=/home/ubuntu/.npm-global/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 server.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

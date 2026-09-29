@@ -8,6 +8,7 @@ A mobile phrasebook for the Mexican Spanish you actually use: everyday phrases, 
 - 🔊 reads the phrase aloud with a Mexican Spanish voice when your phone has one. ⤢ shows it full-screen to hand to the staff.
 - Search covers every situation at once.
 - **Practice** is the old flashcard mode for the current situation: tap to flip, swipe right if you know it.
+- **Talk** (needs a connection): tap 🇺🇸 and speak English to get Mexican Spanish, spoken aloud. Tap 🇲🇽 to hear what they say back in English. Phrasebook phrases are matched first; everything else is translated by Claude. Backend: `voice/` (see `docs/HANDOFF-VOICE-DICTATION-BUILT-20260929.md`).
 - Progress and open topics are saved on your device. Works offline after the first visit.
 
 Plain HTML/CSS/JS, no build step. Phrases live in `phrases.js`.

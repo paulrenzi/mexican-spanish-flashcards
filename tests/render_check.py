@@ -22,7 +22,7 @@ def check(cond, msg):
 
 try:
     with sync_playwright() as pw:
-        b = pw.chromium.launch()
+        b = pw.chromium.launch(args=["--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"])
         ctx = b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2,
                             is_mobile=True, has_touch=True)
         page = ctx.new_page()
@@ -126,6 +126,73 @@ try:
         bg = dp.evaluate("getComputedStyle(document.body).backgroundColor")
         check(bg == "rgb(15, 17, 18)", f"dark mode follows the phone (bg {bg})")
         dp.screenshot(path=str(OUT / "6-dark.png"))
+
+        # Talk: the Worker is mocked here; the fake Chromium mic records a tone, the page converts it to WAV.
+        tc = b.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2, is_mobile=True,
+                           has_touch=True, permissions=["microphone"])
+        tp = tc.new_page()
+        terr = []
+        tp.on("pageerror", lambda e: terr.append(str(e)))
+        seen = {"stt": [], "translate": []}
+        stt_reply = {"body": ""}
+        def on_stt(route):
+            body = route.request.post_data_buffer or b""
+            seen["stt"].append((route.request.url, body[:4], len(body)))
+            route.fulfill(status=stt_reply.get("status", 200), content_type="application/json", body=stt_reply["body"])
+        def on_translate(route):
+            seen["translate"].append(route.request.post_data_json)
+            route.fulfill(status=200, content_type="application/json", body='{"text": "¿Me puede hacer un descuento, por favor?", "ms": 2900}')
+        tp.route("https://mx-voice.paulmichaelrenzi.workers.dev/stt*", on_stt)
+        tp.route("https://mx-voice.paulmichaelrenzi.workers.dev/translate", on_translate)
+        tp.goto(url + ("&" if "?" in url else "?") + "cb=" + str(time.time()))
+        tp.wait_for_selector(".topic")
+        tp.click(".mode[data-mode=talk]")
+        check(tp.is_visible("#talkView") and not tp.is_visible("#listView"), "Talk tab opens the talk view")
+        check(not tp.is_visible("#cats") and not tp.is_visible("#hero"), "talk view hides the situation bar and header")
+        m = tp.evaluate("[matchPhrase('tengo un piquete que se ve infectada', 'es'), matchPhrase('Is there an ATM around here', 'en'), "
+                        "matchPhrase('It is spicy', 'en'), matchPhrase('Can you give me a discount please', 'en'), matchPhrase('cloro', 'es')]")
+        check(m[0] and m[0]["other"] == "I have a bite that looks infected.", f"phrasebook catches a near-miss transcript of the piquete phrase ({m[0] and m[0]['other']})")
+        check(m[1] and m[1]["other"] == "¿Hay un cajero por aquí?", "phrasebook maps English to the curated Spanish")
+        check(m[2] is None, "'It is spicy' does not match 'Is it spicy?'")
+        check(m[3] is None, "a longer sentence falls through to the translator")
+        check(m[4] and "bleach" in m[4]["other"], f"a single word matches its word entry ({m[4] and m[4]['other']})")
+
+        stt_reply["body"] = '{"text": "Tengo un piquete que se ve infectado."}'
+        tp.click(".mic[data-from=es]")
+        tp.wait_for_selector(".mic.rec")
+        check(tp.inner_text(".mic.rec .m-hint") == "Tap to stop", "mic shows it is recording")
+        tp.wait_for_timeout(1500)
+        tp.click(".mic[data-from=es]")
+        tp.wait_for_selector(".turn .t-es")
+        check(bool(seen["stt"]) and "lang=es" in seen["stt"][0][0] and seen["stt"][0][1] == b"RIFF" and seen["stt"][0][2] > 30000,
+              f"recording is posted to /stt as WAV ({seen['stt'][:1] and seen['stt'][0][1:]})")
+        check(tp.inner_text(".turn .t-en") == "I have a bite that looks infected.", "Spanish speech is answered from the phrasebook")
+        check(tp.inner_text(".turn .t-src") == "From the phrasebook" and not seen["translate"], "phrasebook match skips the model")
+
+        stt_reply["body"] = '{"text": "Can you give me a discount, please?"}'
+        tp.click(".mic[data-from=en]"); tp.wait_for_timeout(1200); tp.click(".mic[data-from=en]")
+        tp.wait_for_function("document.querySelectorAll('.turn .t-es').length === 2")
+        first = tp.locator(".turn").first
+        check(seen["translate"] == [{"text": "Can you give me a discount, please?", "from": "en"}], f"unmatched English goes to /translate ({seen['translate']})")
+        check(first.locator(".t-es").inner_text() == "¿Me puede hacer un descuento, por favor?" and first.locator(".t-en").inner_text() == "Can you give me a discount, please?",
+              "newest turn is on top, Spanish big with English under")
+        check(first.locator(".t-src").inner_text() == "Translated by Claude", "model translations are labelled")
+
+        stt_reply.update(status=503, body='{"error": "stt_quota"}')
+        tp.click(".mic[data-from=en]"); tp.wait_for_timeout(800); tp.click(".mic[data-from=en]")
+        tp.wait_for_selector(".turn.err")
+        check("used up for today" in tp.inner_text(".turn.err .t-err"), "a spent Whisper allowance says so plainly")
+        tp.fill("#talkText", "¿Hay un cajero por aquí?")
+        tp.click("[data-type-from=es]")
+        tp.wait_for_function("document.querySelectorAll('.turn').length === 4")
+        check(tp.locator(".turn").first.locator(".t-en").inner_text() == "Is there an ATM around here?", "typed Spanish works through the phrasebook")
+        check(not tp.evaluate("document.documentElement.scrollWidth > innerWidth"), "talk view has no horizontal overflow")
+        tp.screenshot(path=str(OUT / "11-talk.png"), full_page=True)
+        tp.set_viewport_size({"width": 360, "height": 740})
+        hdr = tp.evaluate("(() => { const r = document.querySelector('.modes').getBoundingClientRect(); return [innerWidth, Math.round(r.right), document.documentElement.scrollWidth]; })()")
+        check(hdr[0] == 360 and hdr[1] <= 360 and hdr[2] <= 360, f"three mode tabs fit at 360px without the page zooming out (innerWidth, tabs right, scrollWidth = {hdr})")
+        tp.screenshot(path=str(OUT / "12-talk-narrow.png"))
+        check(not terr, f"no JS errors in talk {terr}")
         b.close()
 finally:
     if server:
