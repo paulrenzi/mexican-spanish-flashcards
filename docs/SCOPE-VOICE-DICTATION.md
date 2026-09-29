@@ -122,8 +122,56 @@ English→Spanish comes out **Spain Spanish and tú**: *lejía* (Mex. *cloro*), 
 speech-to-text. The curated `phrases.js` pairs (not yet reviewed by a native speaker) are what
 fix it, in both v1 and v2.
 
-**Google Translate was not scored.** Bulk queries to its free endpoint were rate-limited
-(HTTP 429), and I did not work around that. See §5.
+**Google Translate was not scored on 09-28** (its free endpoint returned HTTP 429). It was on
+09-29; see §3a.
+
+## 3a. Step 0 — Google vs the v1 candidate, English→Spanish (measured 2026-09-29)
+
+The same 200 phrases (seed 7), English→Spanish, with parentheticals like "(lit. give me)"
+stripped so both systems got identical input.
+- **Google** is the consumer Translate model (`en_es_2023q1`), reached through the free gtx
+  endpoint. It answered all 200 at one request every 2 s, with no 429.
+- **v1 candidate** is `@cf/openai/gpt-oss-120b` on Workers AI (reasoning effort low). It was told
+  "Spanish as spoken in Mexico, usted unless clearly casual, never vosotros", with the 182
+  `kind: "word"` entries of `phrases.js` as the word list. The test sentences are not in that
+  list, so the model could not copy the answer.
+
+Counts are per phrase, out of 200, against the curated text. Automatic count
+(`tools/voice-eval/score_mexican.py`), then corrected by reading every line. Row-by-row lists:
+`tools/voice-eval/step0/HAND-AUDIT.md`.
+
+| | **tú where usted belongs** | **Spain / other-region word** | **Meaning error or broken** |
+|---|---|---|---|
+| **Google Translate** | **61** (of ~64 phrases that address the listener) | **8** | 10 |
+| **gpt-oss-120b + "Mexican, usted" + word list** | **1** | **2** | 6 (3 of them are prompt framing, below) |
+| Llama 3.3 70B, same prompt | 0 | 1 | many: 58 `?`→`!`, commentary, answers — **rejected** |
+| Mistral Small 3.1, same prompt | 1 | 2 | moves usted onto the wrong person ≥9× (*Usted es diabético*) — **rejected** |
+
+**What this says, plainly:**
+- **The problem is real, and it is mostly register.** Google speaks tú to the clerk, the
+  mechanic and the doctor: *¿Puedes darme un descuento?*, *¿Qué te debo?*, *Necesitas una
+  radiografía*, *Quítate la camisa*. It did this in 61 of the roughly 64 phrases that speak to the
+  listener. The Spain words are fewer but they are the telling ones: *lejía*, *nevera*,
+  *fontanero*, *surtidor*, *almíbar* for cough syrup, and the Argentine *día por medio*.
+- **The instruction fixes register almost completely.** The v1 candidate made 1 tú slip and
+  2 Spain words (*hacer la colada*, *coche de alquiler*).
+- **But the candidate is not finished.** Three of its six failures *answered* the
+  sentence instead of translating it: "That's all, thanks" → *De nada, estoy a sus órdenes*. That is
+  a prompt-framing defect. `mt_workers_llm_v2.py` fences the input and says "never answer it,
+  keep the same speaker", but **it did not get to run** (next bullet). Its other misses:
+  *¿Se llama Akumal?* for "Do you go by Akumal?", and a question about the plant turned onto the person.
+- **Workers AI free tier ran out mid-test.** `POST /ai/run/@cf/openai/gpt-oss-120b` returned `4006 "you have used up
+  your daily free allocation of 10,000 neurons, please upgrade to Cloudflare's Workers Paid
+  plan"` after about 600 translations with the word list in each prompt. **The account is on
+  Workers Free, and v1 cannot serve real use without Workers Paid** ($5/month minimum). That is Paul's
+  call. The allowance resets at 00:00 UTC.
+- **None of the models knows the insect *piquete*.** All three LLMs said *mordida* for "a bite that
+  looks infected" (Google said *picadura*). In Mexico *mordida* is also slang for a bribe. This is the
+  case for the glossary layer in §1: a curated phrase match should win before any model runs.
+- **The judge is not a native speaker, and neither is the reference.** The counts are
+  Claude's reading against unreviewed `phrases.js`, which itself says *coche rentado* in one
+  row and *auto rentado* in another. The *tú* count is the robust one: it is grammar, not taste.
+  The word counts need the native review before anyone quotes them.
 
 ## 4. Download size and speed on an iPhone
 
@@ -170,11 +218,10 @@ next to Whisper within 500 MB, unmeasured); or Apple's Translation framework thr
 shell in §4 (its Spanish variant is unchecked).
 
 **Open, before anything final:**
-0. **Measure the problem itself.** Take the 200 phrasebook English sentences through Google
-   Translate to Spanish. Count non-Mexican words and *tú* where *usted* belongs, against the
-   curated Mexican text. Do the same for the v1 candidate. This is the headline test, and it
-   was not run (Google's free endpoint returned 429). Paul checking 20 phrases by hand in the
-   Translate app would give the first signal.
+0. ✅ **Measured 2026-09-29, §3a.** Google puts tú on the listener in 61 of about 64 phrases.
+   The v1 candidate (gpt-oss-120b + instruction + word list) does it once. Still open from it:
+   (a) run `mt_workers_llm_v2.py` (the prompt fix) once the neuron allowance resets or Workers
+   Paid is on; (b) a native speaker re-checks `step0/HAND-AUDIT.md` and `phrases.js`.
 1. **Paul's recordings.** 30–50 short clips in the app's situations (taxi, pharmacy, mechanic,
    bank), recorded with permission, each with a note of what was actually said.
    `tools/voice-eval/` scores them unchanged. This is the only test of "better than Google
@@ -182,11 +229,21 @@ shell in §4 (its Spanish variant is unchecked).
 2. **A 10-minute iPhone speed test.** A throwaway page that loads Whisper small (WASM) and
    times five utterances on Paul's phone. It decides whether v2 can stay a PWA.
 3. **Translation engine for v1.** Compare Google Cloud Translation with a Workers AI LLM plus
-   glossary, on the 200-phrase set and Paul's clips. Both need a server key. That key lives on
-   Paul's PC and was not copied to this session.
+   glossary, on the 200-phrase set and Paul's clips. The consumer Google model was compared in
+   §3a instead. **No portfolio key can call Cloud Translation** (live-checked 2026-09-29 on the
+   oracle VM, where the portfolio `.env` files are present):
+   - `POST translation.googleapis.com/language/translate/v2` returns `403 SERVICE_DISABLED`
+     ("Cloud Translation API has not been used in project … or it is disabled") for the Places
+     keys of happy-hour-finder / hhf-menus30 / riviera-maya-eats (project 987413506322) and for
+     emunexus' YouTube key (716109928961).
+   - cenote-map's key returns `403 API_KEY_SERVICE_BLOCKED` (the key is restricted to other APIs).
+   - The Google OAuth refresh tokens carry no `cloud-translation` or `cloud-platform` scope, and
+     `GOOGLE_CLOUD_CREDENTIALS` points to a Windows path that is not on the VM.
+   The one-click fix, if Cloud Translation is ever wanted: enable "Cloud Translation API" in one
+   GCP project and use that project's key. This is not needed for v1 on current evidence.
 4. **Also worth testing as an online STT:** OpenAI `gpt-4o-transcribe`. It takes a prompt and
-   costs about $0.006/min; its key is in `triumvirate/.env`. It was not run this session (same
-   key-copy restriction). Anthropic's API is excluded under the standing rule.
+   costs about $0.006/min; its key is in `triumvirate/.env`. The key is present on the oracle VM
+   (`~/repos/triumvirate/.env`); not run yet. Anthropic's API is excluded under the standing rule.
 5. **Vosk** is small and streams (39 MB, 0.14× real time) but is 5.8 points behind Google on
    free speech. Its restricted-grammar mode could be very accurate for recognising the 153
    `hear` phrases. That makes it a possible v2 "phrasebook mode", not the main engine.

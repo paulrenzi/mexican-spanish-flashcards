@@ -1,6 +1,6 @@
 # Handoff — voice dictation, after scoping (2026-09-29)
 
-**Written at HEAD `92b6337`.** Supersedes `HANDOFF-VOICE-DICTATION-20260928.md`, which asked for the scope. That scope is done.
+**Written at HEAD `92b6337`; step 0 results added 2026-09-29 on top of `b98efb7`.** Supersedes `HANDOFF-VOICE-DICTATION-20260928.md`, which asked for the scope. That scope is done.
 **The authority is `docs/SCOPE-VOICE-DICTATION.md`. Read it first.** This file only says where things stand and what comes next.
 
 ## The goal, in Paul's words
@@ -47,21 +47,25 @@ The product is **Mexican Spanish out, with no setting to find.** It is a two-way
 - **Don't build yet.** Paul has not approved a build.
 - Never use the paid Anthropic API. Never commit or print a key.
 - Copying credentials from paulspc was refused by the classifier. Do not try that again by any route.
+  (The portfolio `.env` files are already present on the oracle VM under `~/repos/*/.env`. Step 0 used those, and nothing was copied.)
 - `phrases.js` **has not been reviewed by a native speaker.** The glossary, and so the whole "better than Google" claim, depends on it.
 
 ## Next steps (scope §5 has the full list)
 
-0. **Measure the problem itself.** This is the headline number and it has never been run.
-   - Put the 200 phrasebook English sentences through Google Translate into Spanish.
-   - Count the non-Mexican words, and the *tú* where *usted* belongs.
-   - Then do the same for the v1 candidate: an LLM on Workers AI, prompted "Mexican Spanish, usted" with the glossary.
-
-   Google's free gtx endpoint returned 429 on this machine. Two routes are available:
-   - Paul hand-checks about 20 phrases in the Translate app.
-   - A Google Cloud Translation key, if one exists: grep the portfolio `.env` files first, per the global CLAUDE.md.
+0. ✅ **Done 2026-09-29 — scope §3a.** Google puts *tú* on the listener in **61 of about 64**
+   phrases that address someone. The v1 candidate (`gpt-oss-120b` on Workers AI, "Mexican Spanish,
+   usted" + the 182-word list) does it **once**. Spain words: Google 8 phrases, candidate 2.
+   Llama 3.3 70B and Mistral Small 3.1 were rejected. Still open from step 0:
+   - Run `tools/voice-eval/mt_workers_llm_v2.py` (the fix for "answers instead of
+     translating"). It was blocked by the Workers AI **free** allowance
+     (`4006 … daily free allocation of 10,000 neurons`). The allowance resets at 00:00 UTC, or put
+     the account on Workers Paid, which v1 needs anyway ($5/month; Paul's call).
+   - A native speaker re-checks `tools/voice-eval/step0/HAND-AUDIT.md`.
+   - No portfolio key can call Google Cloud Translation (scope §5 item 3 has the live-check errors).
+     It is not needed: the consumer model was measured instead.
 1. Paul's 30–50 situational recordings (pharmacy, taxi, restaurant), scored with `tools/voice-eval/`.
 2. A 10-minute speed test of WASM Whisper on Paul's iPhone.
-3. Pick the v1 translation engine from the results of step 0.
+3. Pick the v1 translation engine. Step 0 points at gpt-oss-120b + instruction + glossary layer, pending the v2 prompt run.
 4. Optional: a gpt-4o-transcribe test (the key is in `triumvirate/.env`), and Vosk grammar mode.
 
 ## Where things are

@@ -1,0 +1,1485 @@
+[
+{
+"cat": "pharmacy",
+"topic": "beach",
+"es": "Tengo un piquete que se ve infectado.",
+"en": "I have a bite that looks infected.",
+"pr": "TEHN-goh oon pee-KEH-teh keh seh veh een-fehk-TAH-doh"
+},
+{
+"cat": "garden",
+"topic": "pots",
+"es": "¿La maceta tiene hoyo para el drenaje?",
+"en": "Does the pot have a drainage hole?",
+"pr": "lah mah-SEH-tah tee-EH-neh OH-yoh PAH-rah ehl dreh-NAH-heh"
+},
+{
+"cat": "clean",
+"topic": "supplies",
+"es": "Hágame una lista de lo que falta.",
+"en": "Make me a list of what we're out of.",
+"pr": "AH-gah-meh OO-nah LEES-tah deh loh keh FAHL-tah"
+},
+{
+"cat": "house",
+"topic": "finish",
+"es": "¿Me da el presupuesto por escrito?",
+"en": "Can you give me the quote in writing?",
+"pr": "meh dah ehl preh-soo-PWEHS-toh por ehs-KREE-toh"
+},
+{
+"cat": "food",
+"topic": "order",
+"es": "Me da…, por favor",
+"en": "I'll have…, please (lit. give me)",
+"pr": "meh DAH…, por fah-VOR",
+"note": "Sounds blunt in English but is completely normal and polite in Mexico."
+},
+{
+"cat": "food",
+"topic": "meal",
+"es": "¡Está muy rico!",
+"en": "It's delicious!",
+"pr": "ehs-TAH mooy REE-koh"
+},
+{
+"cat": "police",
+"topic": "ticket",
+"es": "¿Dónde recojo mi licencia?",
+"en": "Where do I pick up my license?",
+"pr": "DOHN-deh rreh-KOH-hoh mee lee-SEHN-see-ah"
+},
+{
+"cat": "store",
+"topic": "price",
+"es": "¿Me hace un descuento?",
+"en": "Can you give me a discount?",
+"pr": "meh AH-seh oon dehs-KWEHN-toh",
+"note": "Fine at markets and with street vendors. Not in chain stores or supermarkets."
+},
+{
+"cat": "clean",
+"topic": "laundry",
+"es": "¿Puede lavar la ropa?",
+"en": "Can you do the laundry?",
+"pr": "PWEH-deh lah-VAR lah ROH-pah"
+},
+{
+"cat": "bank",
+"topic": "bills",
+"es": "¿Puedo depositar a esta cuenta?",
+"en": "Can I deposit to this account?",
+"pr": "PWEH-doh deh-poh-see-TAR ah EHS-tah KWEHN-tah",
+"note": "Oxxo takes cash deposits to many bank cards. It's how many people pay rent or workers."
+},
+{
+"cat": "food",
+"topic": "custom",
+"es": "¿Pica?",
+"en": "Is it spicy?",
+"pr": "PEE-kah",
+"note": "If they say \"poquito\" (a little), assume it's spicy."
+},
+{
+"cat": "taxi",
+"topic": "bus",
+"es": "¿Para en el aeropuerto?",
+"en": "Does it stop at the airport?",
+"pr": "PAH-rah ehn ehl ah-eh-roh-PWEHR-toh"
+},
+{
+"cat": "gas",
+"topic": "pay",
+"es": "¿Puedo pagar con tarjeta aquí en la bomba?",
+"en": "Can I pay by card here at the pump?",
+"pr": "PWEH-doh pah-GAR kohn tar-HEH-tah ah-KEE ehn lah BOHM-bah"
+},
+{
+"cat": "daily",
+"topic": "greet",
+"es": "Nos vemos",
+"en": "See you",
+"pr": "nohs VEH-mohs"
+},
+{
+"cat": "store",
+"topic": "find",
+"es": "¿Dónde encuentro…?",
+"en": "Where can I find…?",
+"pr": "DOHN-deh ehn-KWEHN-troh"
+},
+{
+"cat": "repair",
+"topic": "ac",
+"es": "Hace un ruido raro.",
+"en": "It's making a strange noise.",
+"pr": "AH-seh oon RRWEE-doh RRAH-roh"
+},
+{
+"cat": "repair",
+"topic": "problem",
+"es": "Hay humedad en la pared.",
+"en": "There's damp in the wall.",
+"pr": "eye oo-meh-DAHD ehn lah pah-REHD"
+},
+{
+"cat": "food",
+"topic": "drinks",
+"es": "Un café con leche",
+"en": "A coffee with milk",
+"pr": "oon kah-FEH kohn LEH-cheh",
+"note": "\"Café de olla\" is sweet, cinnamon-spiced coffee. Worth trying."
+},
+{
+"cat": "gas",
+"topic": "trouble",
+"es": "¿Hay un mecánico cerca?",
+"en": "Is there a mechanic nearby?",
+"pr": "eye oon meh-KAH-nee-koh SEHR-kah"
+},
+{
+"cat": "store",
+"topic": "sizes",
+"es": "Más grande / más chico",
+"en": "Bigger / smaller",
+"pr": "mahs GRAHN-deh / mahs CHEE-koh",
+"note": "Mexico says \"chico\" far more than \"pequeño\"."
+},
+{
+"cat": "police",
+"topic": "report",
+"es": "Entraron a robar a mi casa.",
+"en": "My house was broken into.",
+"pr": "ehn-TRAH-rohn ah rroh-BAR ah mee KAH-sah"
+},
+{
+"cat": "repair",
+"topic": "who",
+"es": "¿Cuándo puede venir?",
+"en": "When can you come?",
+"pr": "KWAN-doh PWEH-deh veh-NEER"
+},
+{
+"cat": "food",
+"topic": "custom",
+"es": "Que no pique, por favor",
+"en": "Not spicy, please",
+"pr": "keh noh PEE-keh, por fah-VOR"
+},
+{
+"cat": "bank",
+"topic": "exchange",
+"es": "Quiero cambiar dólares.",
+"en": "I want to change dollars.",
+"pr": "kee-EH-roh kahm-bee-AR DOH-lah-rehs"
+},
+{
+"cat": "garden",
+"topic": "water",
+"kind": "hear",
+"es": "Cada tercer día",
+"en": "Every other day",
+"pr": "KAH-dah tehr-SEHR DEE-ah",
+"note": "Very common in Mexico. Literally “every third day”, but it means every other day."
+},
+{
+"cat": "gas",
+"topic": "pay",
+"kind": "hear",
+"es": "¿Efectivo o tarjeta?",
+"en": "Cash or card?",
+"pr": "eh-fehk-TEE-voh oh tar-HEH-tah"
+},
+{
+"cat": "house",
+"topic": "legal",
+"es": "¿El vendedor es el dueño registrado?",
+"en": "Is the seller the registered owner?",
+"pr": "ehl vehn-deh-DOR ehs ehl DWEH-nyoh rreh-hees-TRAH-doh"
+},
+{
+"cat": "house",
+"topic": "legal",
+"es": "¿Cuánto son los gastos de cierre?",
+"en": "How much are the closing costs?",
+"pr": "KWAN-toh sohn lohs GAHS-tohs deh see-EH-rreh",
+"note": "Acquisition tax, notary, trust setup and appraisal add up to several percent of the price. Get the estimate in writing."
+},
+{
+"cat": "doctor",
+"topic": "dentist",
+"kind": "hear",
+"es": "Hay que sacar la muela.",
+"en": "The tooth has to come out.",
+"pr": "eye keh sah-KAR lah MWEH-lah"
+},
+{
+"cat": "food",
+"topic": "custom",
+"es": "Soy vegetariano / vegetariana",
+"en": "I'm vegetarian (man / woman)",
+"pr": "soy veh-heh-tah-ree-AH-noh"
+},
+{
+"cat": "bank",
+"topic": "change",
+"kind": "hear",
+"es": "¿Tiene monedas?",
+"en": "Do you have coins?",
+"pr": "tee-EH-neh moh-NEH-dahs"
+},
+{
+"cat": "bank",
+"topic": "bills",
+"es": "¿Cuándo vence?",
+"en": "When is it due?",
+"pr": "KWAN-doh VEHN-seh"
+},
+{
+"cat": "clean",
+"topic": "supplies",
+"kind": "hear",
+"es": "Ya se acabó el cloro.",
+"en": "The bleach is all gone.",
+"pr": "yah seh ah-kah-BOH ehl KLOH-roh"
+},
+{
+"cat": "food",
+"topic": "order",
+"es": "¿Me regala una servilleta?",
+"en": "Could I get a napkin?",
+"pr": "meh reh-GAH-lah OO-nah sehr-vee-YEH-tah",
+"note": "\"Regalar\" literally means to gift, but Mexicans use it as a soft, polite \"may I have\"."
+},
+{
+"cat": "gas",
+"topic": "pay",
+"es": "¿Me da un ticket?",
+"en": "Can I have a receipt?",
+"pr": "meh dah oon TEE-keht"
+},
+{
+"cat": "food",
+"topic": "order",
+"es": "¿Cuál es la especialidad de la casa?",
+"en": "What's the house specialty?",
+"pr": "kwahl ehs lah ehs-peh-see-ah-lee-DAHD deh lah KAH-sah"
+},
+{
+"cat": "bank",
+"topic": "atm",
+"es": "¿Hay un cajero por aquí?",
+"en": "Is there an ATM around here?",
+"pr": "eye oon kah-HEH-roh por ah-KEE",
+"note": "Use ATMs inside a bank or a big store, in daylight. Standalone ones in tourist areas charge more and get skimmed more."
+},
+{
+"cat": "garden",
+"topic": "light",
+"es": "¿Es de interior o de exterior?",
+"en": "Is it an indoor or outdoor plant?",
+"pr": "ehs deh een-teh-ree-OR oh deh ehks-teh-ree-OR"
+},
+{
+"cat": "pharmacy",
+"topic": "ask",
+"es": "¿Lo tiene en jarabe?",
+"en": "Do you have it as a syrup?",
+"pr": "loh tee-EH-neh ehn hah-RAH-beh",
+"note": "en pastillas = in pills, en pomada = as an ointment, en gotas = as drops."
+},
+{
+"cat": "repair",
+"topic": "problem",
+"es": "¿Puede venir a verlo?",
+"en": "Can you come take a look at it?",
+"pr": "PWEH-deh veh-NEER ah VEHR-loh"
+},
+{
+"cat": "garden",
+"topic": "soil",
+"es": "¿Necesita buen drenaje?",
+"en": "Does it need good drainage?",
+"pr": "neh-seh-SEE-tah bwehn dreh-NAH-heh"
+},
+{
+"cat": "police",
+"topic": "crash",
+"es": "¿Está bien? ¿Está herido?",
+"en": "Are you OK? Are you hurt?",
+"pr": "ehs-TAH bee-EHN? ehs-TAH eh-REE-doh"
+},
+{
+"cat": "garden",
+"topic": "water",
+"es": "¿Hay que dejar que se seque la tierra?",
+"en": "Should I let the soil dry out between waterings?",
+"pr": "eye keh deh-HAR keh seh SEH-keh lah tee-EH-rrah"
+},
+{
+"cat": "bank",
+"topic": "exchange",
+"kind": "hear",
+"es": "No aceptamos billetes rotos.",
+"en": "We don't take torn bills.",
+"pr": "noh ah-sehp-TAH-mohs bee-YEH-tehs RROH-tohs"
+},
+{
+"cat": "pharmacy",
+"topic": "dose",
+"kind": "hear",
+"es": "Termine todo el tratamiento.",
+"en": "Finish the whole course.",
+"pr": "tehr-MEE-neh TOH-doh ehl trah-tah-mee-EHN-toh"
+},
+{
+"cat": "bank",
+"topic": "atm",
+"es": "¿Cuánto cobra de comisión?",
+"en": "How much is the fee?",
+"pr": "KWAN-toh KOH-brah deh koh-mee-see-OHN"
+},
+{
+"cat": "doctor",
+"topic": "history",
+"es": "Me duele aquí.",
+"en": "It hurts here.",
+"pr": "meh DWEH-leh ah-KEE",
+"note": "Point as you say it. For symptoms by body part, see the Pharmacy section."
+},
+{
+"cat": "garden",
+"topic": "bloom",
+"es": "¿Da fruto? ¿En cuánto tiempo?",
+"en": "Does it bear fruit? How long until it does?",
+"pr": "dah FROO-toh? ehn KWAHN-toh tee-EHM-poh"
+},
+{
+"cat": "store",
+"topic": "register",
+"es": "Es todo, gracias",
+"en": "That's all, thanks",
+"pr": "ehs TOH-doh, GRAH-see-ahs"
+},
+{
+"cat": "bank",
+"topic": "bills",
+"es": "Una recarga de doscientos, por favor.",
+"en": "A 200-peso phone top-up, please.",
+"pr": "OO-nah rreh-KAR-gah deh doh-see-EHN-tohs, por fah-VOR"
+},
+{
+"cat": "doctor",
+"topic": "tests",
+"kind": "hear",
+"es": "Le voy a mandar unos análisis.",
+"en": "I'm going to order some lab tests.",
+"pr": "leh voy ah mahn-DAR OO-nohs ah-NAH-lee-sees",
+"note": "Labs like Chopo or Salud Digna do blood work fast and cheap, often without a separate appointment."
+},
+{
+"cat": "house",
+"topic": "offer",
+"es": "¿Cuánto de enganche?",
+"en": "How much down payment?",
+"pr": "KWAN-toh deh ehn-GAHN-cheh"
+},
+{
+"cat": "garden",
+"topic": "find",
+"es": "¿Tienen plantas de sombra?",
+"en": "Do you have shade plants?",
+"pr": "tee-EH-nehn PLAHN-tahs deh SOHM-brah"
+},
+{
+"cat": "clean",
+"topic": "laundry",
+"es": "¿Puede planchar estas camisas?",
+"en": "Can you iron these shirts?",
+"pr": "PWEH-deh plahn-CHAR EHS-tahs kah-MEE-sahs"
+},
+{
+"cat": "store",
+"topic": "pay",
+"kind": "hear",
+"es": "Solo efectivo",
+"en": "Cash only",
+"pr": "SOH-loh eh-fehk-TEE-voh",
+"note": "A sign you'll see often."
+},
+{
+"cat": "police",
+"topic": "crash",
+"es": "Me quedé tirado en la carretera.",
+"en": "I'm stranded on the highway.",
+"pr": "meh keh-DEH tee-RAH-doh ehn lah kah-rreh-TEH-rah",
+"note": "On federal highways, the Ángeles Verdes (dial 078) help stranded drivers for free."
+},
+{
+"cat": "food",
+"topic": "custom",
+"es": "¿Tiene carne?",
+"en": "Does it have meat?",
+"pr": "tee-EH-neh KAR-neh",
+"note": "Some people don't count chicken or ham as \"carne\". Ask about each: pollo, jamón, manteca (lard)."
+},
+{
+"cat": "bank",
+"topic": "atm",
+"kind": "hear",
+"es": "Operación no disponible.",
+"en": "Transaction not available.",
+"pr": "oh-peh-rah-see-OHN noh dees-poh-NEE-bleh"
+},
+{
+"cat": "food",
+"topic": "custom",
+"es": "La salsa aparte, por favor",
+"en": "Sauce on the side, please",
+"pr": "lah SAHL-sah ah-PAR-teh"
+},
+{
+"cat": "house",
+"topic": "property",
+"es": "¿Tiene gravámenes?",
+"en": "Are there liens on it?",
+"pr": "tee-EH-neh grah-VAH-meh-nehs",
+"note": "The notary checks this with a certificado de libertad de gravamen."
+},
+{
+"cat": "gas",
+"topic": "fill",
+"es": "¿Cuál es la magna?",
+"en": "Which one is regular?",
+"pr": "kwahl ehs lah MAHG-nah"
+},
+{
+"cat": "taxi",
+"topic": "colectivo",
+"es": "En la entrada, por favor.",
+"en": "At the entrance, please.",
+"pr": "ehn lah ehn-TRAH-dah, por fah-VOR"
+},
+{
+"cat": "doctor",
+"topic": "history",
+"es": "Cada vez está peor.",
+"en": "It keeps getting worse.",
+"pr": "KAH-dah vehs ehs-TAH peh-OR"
+},
+{
+"cat": "police",
+"topic": "ticket",
+"es": "Prefiero pagarla en la oficina.",
+"en": "I'd rather pay it at the office.",
+"pr": "preh-fee-EH-roh pah-GAR-lah ehn lah oh-fee-SEE-nah"
+},
+{
+"cat": "repair",
+"topic": "who",
+"es": "Le mando una foto del problema.",
+"en": "I'll send you a photo of the problem.",
+"pr": "leh MAHN-doh OO-nah FOH-toh dehl proh-BLEH-mah"
+},
+{
+"cat": "pharmacy",
+"topic": "rx",
+"es": "Tengo una receta de Estados Unidos.",
+"en": "I have a prescription from the US.",
+"pr": "TEHN-goh OO-nah reh-SEH-tah deh ehs-TAH-dohs oo-NEE-dohs",
+"note": "A US prescription may not be accepted for antibiotics or controlled drugs. The doctor next door can write a Mexican one."
+},
+{
+"cat": "repair",
+"topic": "during",
+"es": "Muchas gracias, quedó muy bien.",
+"en": "Thank you so much, it came out great.",
+"pr": "MOO-chahs GRAH-see-ahs, keh-DOH mwee bee-EHN"
+},
+{
+"cat": "doctor",
+"topic": "treat",
+"kind": "hear",
+"es": "Tome muchos líquidos.",
+"en": "Drink lots of fluids.",
+"pr": "TOH-meh MOO-chohs LEE-kee-dohs"
+},
+{
+"cat": "repair",
+"topic": "quote",
+"es": "¿Da garantía?",
+"en": "Do you give a guarantee?",
+"pr": "dah gah-rahn-TEE-ah"
+},
+{
+"cat": "clean",
+"topic": "tasks",
+"es": "Si le da tiempo, limpie el refri.",
+"en": "If you have time, clean the fridge.",
+"pr": "see leh dah tee-EHM-poh, LEEM-pee-eh ehl REH-free"
+},
+{
+"cat": "pharmacy",
+"topic": "dose",
+"es": "¿Antes o después de comer?",
+"en": "Before or after eating?",
+"pr": "AHN-tehs oh dehs-PWEHS deh koh-MEHR"
+},
+{
+"cat": "gas",
+"topic": "trouble",
+"es": "¿Para cuándo queda?",
+"en": "When will it be ready?",
+"pr": "PAH-rah KWAHN-doh KEH-dah"
+},
+{
+"cat": "garden",
+"topic": "bloom",
+"es": "¿De qué color es la flor?",
+"en": "What color is the flower?",
+"pr": "deh keh koh-LOR ehs lah flor"
+},
+{
+"cat": "gas",
+"topic": "trouble",
+"es": "¿Me puede pasar corriente?",
+"en": "Can you give me a jump start?",
+"pr": "meh PWEH-deh pah-SAR koh-rree-EHN-teh"
+},
+{
+"cat": "store",
+"topic": "price",
+"es": "¿Cuánto es?",
+"en": "How much is it? (total)",
+"pr": "KWAHN-toh EHS"
+},
+{
+"cat": "bank",
+"topic": "change",
+"es": "¿Me lo puede dar en billetes chicos?",
+"en": "Can you give it to me in small bills?",
+"pr": "meh loh PWEH-deh dar ehn bee-YEH-tehs CHEE-kohs"
+},
+{
+"cat": "pharmacy",
+"topic": "dose",
+"es": "¿Por cuántos días?",
+"en": "For how many days?",
+"pr": "por KWAHN-tohs DEE-ahs"
+},
+{
+"cat": "police",
+"topic": "docs",
+"es": "Es un auto rentado.",
+"en": "It's a rental car.",
+"pr": "ehs oon OW-toh rrehn-TAH-doh"
+},
+{
+"cat": "taxi",
+"topic": "colectivo",
+"es": "¿Pasa por Akumal?",
+"en": "Do you go by Akumal?",
+"pr": "PAH-sah por ah-koo-MAHL"
+},
+{
+"cat": "clean",
+"topic": "schedule",
+"es": "¿Cuánto cobra por día?",
+"en": "How much do you charge per day?",
+"pr": "KWAHN-toh KOH-brah por DEE-ah",
+"note": "Paying by the day is common. Por hora = per hour."
+},
+{
+"cat": "repair",
+"topic": "quote",
+"es": "¿Me da un presupuesto?",
+"en": "Can you give me a quote?",
+"pr": "meh dah oon preh-soo-PWEHS-toh"
+},
+{
+"cat": "pharmacy",
+"topic": "ask",
+"es": "¿Tiene el genérico?",
+"en": "Do you have the generic?",
+"pr": "tee-EH-neh ehl heh-NEH-ree-koh",
+"note": "Generics are much cheaper. Farmacias Similares sells mostly generics. The brand name is el de patente."
+},
+{
+"cat": "house",
+"topic": "look",
+"es": "¿Está amueblada?",
+"en": "Is it furnished?",
+"pr": "ehs-TAH ah-mweh-BLAH-dah"
+},
+{
+"cat": "doctor",
+"topic": "pay",
+"es": "Necesito factura.",
+"en": "I need an official invoice.",
+"pr": "neh-seh-SEE-toh fahk-TOO-rah"
+},
+{
+"cat": "doctor",
+"topic": "tests",
+"kind": "hear",
+"es": "Necesita una radiografía.",
+"en": "You need an X-ray.",
+"pr": "neh-seh-SEE-tah OO-nah rrah-dee-oh-grah-FEE-ah"
+},
+{
+"cat": "police",
+"topic": "stop",
+"es": "No, ¿qué pasó?",
+"en": "No, what happened?",
+"pr": "noh, keh pah-SOH"
+},
+{
+"cat": "doctor",
+"topic": "dentist",
+"es": "Me duele con lo frío.",
+"en": "It hurts with cold things.",
+"pr": "meh DWEH-leh kohn loh FREE-oh"
+},
+{
+"cat": "garden",
+"topic": "climate",
+"es": "¿Aguanta el calor?",
+"en": "Can it take the heat?",
+"pr": "ah-GWAHN-tah ehl kah-LOR"
+},
+{
+"cat": "clean",
+"topic": "schedule",
+"es": "¿A qué hora puede llegar?",
+"en": "What time can you get here?",
+"pr": "ah keh OH-rah PWEH-deh yeh-GAR"
+},
+{
+"cat": "garden",
+"topic": "pots",
+"es": "¿Hay que trasplantarla?",
+"en": "Does it need to be repotted?",
+"pr": "eye keh trahs-plahn-TAR-lah"
+},
+{
+"cat": "taxi",
+"topic": "ride",
+"es": "Más despacio, por favor.",
+"en": "Slower, please.",
+"pr": "mahs dehs-PAH-see-oh, por fah-VOR"
+},
+{
+"cat": "repair",
+"topic": "who",
+"es": "Necesito un plomero.",
+"en": "I need a plumber.",
+"pr": "neh-seh-SEE-toh oon ploh-MEH-roh"
+},
+{
+"cat": "daily",
+"topic": "greet",
+"es": "¡Que le vaya bien!",
+"en": "Have a good one! (lit. may it go well)",
+"pr": "keh leh VAH-yah bee-EHN"
+},
+{
+"cat": "food",
+"topic": "pay",
+"es": "¿Está incluida la propina?",
+"en": "Is the tip included?",
+"pr": "ehs-TAH een-kloo-EE-dah lah proh-PEE-nah",
+"note": "10–15% is standard at sit-down restaurants. Check the bill for \"servicio incluido\"."
+},
+{
+"cat": "bank",
+"topic": "atm",
+"es": "El cajero se tragó mi tarjeta.",
+"en": "The ATM ate my card.",
+"pr": "ehl kah-HEH-roh seh trah-GOH mee tar-HEH-tah"
+},
+{
+"cat": "bank",
+"topic": "change",
+"es": "¿Me cambia este billete?",
+"en": "Can you break this bill?",
+"pr": "meh KAHM-bee-ah EHS-teh bee-YEH-teh"
+},
+{
+"cat": "doctor",
+"topic": "history",
+"es": "Soy diabético.",
+"en": "I'm diabetic.",
+"pr": "soy dee-ah-BEH-tee-koh"
+},
+{
+"cat": "clean",
+"topic": "schedule",
+"es": "¿Qué días puede venir?",
+"en": "What days can you come?",
+"pr": "keh DEE-ahs PWEH-deh veh-NEER",
+"note": "Use usted with the person who cleans for you. It's the respectful norm."
+},
+{
+"cat": "clean",
+"topic": "schedule",
+"kind": "hear",
+"es": "Voy a llegar un poquito tarde.",
+"en": "I'm going to be a little late.",
+"pr": "voy ah yeh-GAR oon poh-KEE-toh TAR-deh"
+},
+{
+"cat": "bank",
+"topic": "branch",
+"es": "Quiero abrir una cuenta.",
+"en": "I want to open an account.",
+"pr": "kee-EH-roh ah-BREER OO-nah KWEHN-tah",
+"note": "Banks usually ask for a passport, a residency card, and a comprobante de domicilio (utility bill)."
+},
+{
+"cat": "doctor",
+"topic": "history",
+"kind": "hear",
+"es": "¿Desde cuándo se siente así?",
+"en": "Since when have you felt like this?",
+"pr": "DEHS-deh KWAN-doh seh see-EHN-teh ah-SEE"
+},
+{
+"cat": "bank",
+"topic": "bills",
+"es": "¿Puedo pagar aquí el agua?",
+"en": "Can I pay the water bill here?",
+"pr": "PWEH-doh pah-GAR ah-KEE ehl AH-gwah",
+"note": "In Quintana Roo the water company is Aguakan in Cancún and Playa, and CAPA elsewhere."
+},
+{
+"cat": "repair",
+"topic": "during",
+"es": "Pásele, por favor.",
+"en": "Come in, please.",
+"pr": "PAH-seh-leh, por fah-VOR"
+},
+{
+"cat": "food",
+"topic": "drinks",
+"es": "Sin hielo",
+"en": "No ice",
+"pr": "seen YEH-loh"
+},
+{
+"cat": "store",
+"topic": "price",
+"es": "Está muy caro",
+"en": "It's very expensive",
+"pr": "ehs-TAH mooy KAH-roh"
+},
+{
+"cat": "pharmacy",
+"topic": "symptoms",
+"es": "Tengo fiebre.",
+"en": "I have a fever.",
+"pr": "TEHN-goh fee-EH-breh"
+},
+{
+"cat": "taxi",
+"topic": "fare",
+"es": "¿Trae cambio de quinientos?",
+"en": "Do you have change for a 500?",
+"pr": "TRAH-eh KAHM-bee-oh deh kee-nee-EHN-tohs"
+},
+{
+"cat": "food",
+"topic": "drinks",
+"es": "Una cerveza, por favor",
+"en": "A beer, please",
+"pr": "OO-nah sehr-VEH-sah",
+"note": "Ask \"¿Cuáles tiene?\" to hear what beers they have."
+},
+{
+"cat": "food",
+"topic": "custom",
+"es": "Soy alérgico / alérgica a…",
+"en": "I'm allergic to… (man / woman)",
+"pr": "soy ah-LEHR-hee-koh / ah-LEHR-hee-kah ah",
+"note": "cacahuate = peanut, mariscos = shellfish, nueces = nuts, lácteos = dairy, gluten = gluten"
+},
+{
+"cat": "pharmacy",
+"topic": "rx",
+"es": "¿Necesito receta para esto?",
+"en": "Do I need a prescription for this?",
+"pr": "neh-seh-SEE-toh reh-SEH-tah PAH-rah EHS-toh",
+"note": "Many medicines are sold without one, but antibiotics always need a Mexican prescription."
+},
+{
+"cat": "bank",
+"topic": "change",
+"kind": "hear",
+"es": "¿Le debo el cambio?",
+"en": "Can I owe you the change?",
+"pr": "leh DEH-boh ehl KAHM-bee-oh"
+},
+{
+"cat": "repair",
+"topic": "water",
+"es": "Necesito una pipa de agua.",
+"en": "I need a water truck.",
+"pr": "neh-seh-SEE-toh OO-nah PEE-pah deh AH-gwah",
+"note": "When city water is out, a pipa fills your cisterna."
+},
+{
+"cat": "pharmacy",
+"topic": "ask",
+"es": "¿Tiene algo para la gripa?",
+"en": "Do you have something for a cold?",
+"pr": "tee-EH-neh AHL-goh PAH-rah lah GREE-pah"
+},
+{
+"cat": "clean",
+"topic": "careful",
+"es": "No use cloro en el mármol, por favor.",
+"en": "Please don't use bleach on the marble.",
+"pr": "noh OO-seh KLOH-roh ehn ehl MAR-mohl, por fah-VOR"
+},
+{
+"cat": "clean",
+"topic": "schedule",
+"es": "Si no puede venir, mándeme un mensaje.",
+"en": "If you can't come, send me a message.",
+"pr": "see noh PWEH-deh veh-NEER, MAHN-deh-meh oon mehn-SAH-heh",
+"note": "WhatsApp is how almost everyone texts in Mexico."
+},
+{
+"cat": "daily",
+"topic": "directions",
+"es": "¿Dónde está el baño?",
+"en": "Where is the bathroom?",
+"pr": "DOHN-deh ehs-TAH ehl BAH-nyoh",
+"note": "Public restrooms often cost 5–10 pesos. Keep coins handy."
+},
+{
+"cat": "repair",
+"topic": "during",
+"kind": "hear",
+"es": "Le falta una pieza.",
+"en": "It needs a part.",
+"pr": "leh FAHL-tah OO-nah pee-EH-sah"
+},
+{
+"cat": "clean",
+"topic": "tasks",
+"es": "Sacuda los muebles, por favor.",
+"en": "Please dust the furniture.",
+"pr": "sah-KOO-dah lohs MWEH-blehs, por fah-VOR"
+},
+{
+"cat": "garden",
+"topic": "climate",
+"es": "Es para una terraza cerca del mar",
+"en": "It's for a terrace near the sea",
+"pr": "ehs PAH-rah OO-nah teh-RRAH-sah SEHR-kah dehl mar"
+},
+{
+"cat": "house",
+"topic": "look",
+"es": "¿Por qué la venden?",
+"en": "Why are they selling?",
+"pr": "por KEH lah VEHN-dehn"
+},
+{
+"cat": "garden",
+"topic": "water",
+"es": "¿Necesita mucha agua o poca?",
+"en": "Does it need a lot of water or a little?",
+"pr": "neh-seh-SEE-tah MOO-chah AH-gwah oh POH-kah"
+},
+{
+"cat": "taxi",
+"topic": "colectivo",
+"es": "¿Va a Playa del Carmen?",
+"en": "Are you going to Playa del Carmen?",
+"pr": "vah ah PLAH-yah dehl KAR-mehn",
+"note": "Colectivos are shared white vans on Highway 307. Wave one down from the roadside."
+},
+{
+"cat": "doctor",
+"topic": "treat",
+"es": "¿Necesito regresar?",
+"en": "Do I need to come back?",
+"pr": "neh-seh-SEE-toh rreh-greh-SAR"
+},
+{
+"cat": "gas",
+"topic": "pay",
+"es": "Le di un billete de quinientos.",
+"en": "I gave you a 500 bill.",
+"pr": "leh dee oon bee-YEH-teh deh kee-nee-EHN-tohs",
+"note": "The classic scam is swapping your 500 for a 50 and saying you underpaid. Stand firm."
+},
+{
+"cat": "doctor",
+"topic": "desk",
+"es": "Tengo cita a las diez.",
+"en": "I have an appointment at ten.",
+"pr": "TEHN-goh SEE-tah ah lahs dee-EHS"
+},
+{
+"cat": "garden",
+"topic": "light",
+"es": "¿Necesita sol directo?",
+"en": "Does it need direct sun?",
+"pr": "neh-seh-SEE-tah sohl dee-REHK-toh"
+},
+{
+"cat": "gas",
+"topic": "trouble",
+"es": "¿Cuánto cuesta arreglarlo?",
+"en": "How much to fix it?",
+"pr": "KWAHN-toh KWEHS-tah ah-rreh-GLAR-loh"
+},
+{
+"cat": "clean",
+"topic": "supplies",
+"kind": "hear",
+"es": "Hace falta jabón para la ropa.",
+"en": "We need laundry soap.",
+"pr": "AH-seh FAHL-tah hah-BOHN PAH-rah lah ROH-pah"
+},
+{
+"cat": "clean",
+"topic": "careful",
+"es": "No deje salir al perro.",
+"en": "Don't let the dog out.",
+"pr": "noh DEH-heh sah-LEER ahl PEH-rroh"
+},
+{
+"cat": "house",
+"topic": "finish",
+"es": "¿Quién compra el material?",
+"en": "Who buys the materials?",
+"pr": "kee-EHN KOHM-prah ehl mah-teh-ree-AHL"
+},
+{
+"cat": "store",
+"topic": "price",
+"es": "¿Cuánto cuesta?",
+"en": "How much does it cost?",
+"pr": "KWAHN-toh KWEHS-tah"
+},
+{
+"cat": "garden",
+"topic": "climate",
+"es": "¿Aguanta el viento?",
+"en": "Can it take wind?",
+"pr": "ah-GWAHN-tah ehl vee-EHN-toh"
+},
+{
+"cat": "doctor",
+"topic": "desk",
+"es": "Es la primera vez que vengo.",
+"en": "It's my first time here.",
+"pr": "ehs lah pree-MEH-rah vehs keh VEHN-goh"
+},
+{
+"cat": "clean",
+"topic": "chat",
+"es": "Si tiene hambre, agarre algo del refri.",
+"en": "If you're hungry, help yourself to something from the fridge.",
+"pr": "see tee-EH-neh AHM-breh, ah-GAH-rreh AHL-goh dehl REH-free"
+},
+{
+"cat": "police",
+"topic": "report",
+"es": "Me robaron el celular.",
+"en": "My phone was stolen.",
+"pr": "meh rroh-BAH-rohn ehl seh-loo-LAR"
+},
+{
+"cat": "pharmacy",
+"topic": "symptoms",
+"es": "Me torcí el tobillo.",
+"en": "I twisted my ankle.",
+"pr": "meh tor-SEE ehl toh-BEE-yoh"
+},
+{
+"cat": "garden",
+"topic": "light",
+"kind": "hear",
+"es": "Media sombra",
+"en": "Partial shade",
+"pr": "MEH-dee-ah SOHM-brah",
+"note": "Sun for part of the day, or filtered sun under trees."
+},
+{
+"cat": "repair",
+"topic": "ac",
+"es": "El aire no enfría.",
+"en": "The AC isn't cooling.",
+"pr": "ehl EYE-reh noh ehn-FREE-ah",
+"note": "People say el aire, el clima, or el minisplit for an air conditioner."
+},
+{
+"cat": "police",
+"topic": "report",
+"es": "Perdí mi pasaporte.",
+"en": "I lost my passport.",
+"pr": "pehr-DEE mee pah-sah-POR-teh"
+},
+{
+"cat": "pharmacy",
+"topic": "symptoms",
+"es": "No puedo dormir.",
+"en": "I can't sleep.",
+"pr": "noh PWEH-doh dor-MEER"
+},
+{
+"cat": "repair",
+"topic": "problem",
+"es": "Este contacto no sirve.",
+"en": "This outlet doesn't work.",
+"pr": "EHS-teh kohn-TAHK-toh noh SEER-veh",
+"note": "An outlet is un contacto in Mexico."
+},
+{
+"cat": "clean",
+"topic": "tasks",
+"es": "Saque la basura, por favor.",
+"en": "Please take out the trash.",
+"pr": "SAH-keh lah bah-SOO-rah, por fah-VOR"
+},
+{
+"cat": "clean",
+"topic": "kitchen",
+"es": "Los trastes limpios van en esta alacena.",
+"en": "The clean dishes go in this cupboard.",
+"pr": "lohs TRAHS-tehs LEEM-pee-ohs vahn ehn EHS-tah ah-lah-SEH-nah"
+},
+{
+"cat": "gas",
+"topic": "service",
+"es": "¿Me checa el aceite?",
+"en": "Can you check the oil?",
+"pr": "meh CHEH-kah ehl ah-SAY-teh"
+},
+{
+"cat": "doctor",
+"topic": "pay",
+"es": "¿Me puede dar un estimado del costo?",
+"en": "Can you give me a cost estimate?",
+"pr": "meh PWEH-deh dar oon ehs-tee-MAH-doh dehl KOHS-toh"
+},
+{
+"cat": "store",
+"topic": "price",
+"es": "¿Cuánto le debo?",
+"en": "What do I owe you?",
+"pr": "KWAHN-toh leh DEH-boh"
+},
+{
+"cat": "garden",
+"topic": "safety",
+"es": "¿Es segura para niños?",
+"en": "Is it safe for kids?",
+"pr": "ehs seh-GOO-rah PAH-rah NEE-nyohs"
+},
+{
+"cat": "house",
+"topic": "look",
+"es": "¿Qué tan lejos está de la playa?",
+"en": "How far is it from the beach?",
+"pr": "keh tahn LEH-hohs ehs-TAH deh lah PLAH-yah"
+},
+{
+"cat": "gas",
+"topic": "service",
+"es": "¿Me limpia el parabrisas?",
+"en": "Can you clean the windshield?",
+"pr": "meh LEEM-pee-ah ehl pah-rah-BREE-sahs"
+},
+{
+"cat": "gas",
+"topic": "service",
+"es": "¿Tienen agua para el radiador?",
+"en": "Do you have water for the radiator?",
+"pr": "tee-EH-nehn AH-gwah PAH-rah ehl rah-dee-ah-DOR"
+},
+{
+"cat": "daily",
+"topic": "polite",
+"es": "De nada",
+"en": "You're welcome",
+"pr": "deh NAH-dah",
+"note": "You'll also hear \"a la orden\" (at your service) and \"para servirle\"."
+},
+{
+"cat": "taxi",
+"topic": "ride",
+"es": "En la esquina, por favor.",
+"en": "At the corner, please.",
+"pr": "ehn lah ehs-KEE-nah, por fah-VOR"
+},
+{
+"cat": "bank",
+"topic": "transfer",
+"es": "Ya le transferí.",
+"en": "I've sent you the transfer.",
+"pr": "yah leh trahns-feh-REE"
+},
+{
+"cat": "garden",
+"topic": "bloom",
+"es": "¿Necesita otra para dar fruto?",
+"en": "Does it need a second plant to fruit?",
+"pr": "neh-seh-SEE-tah OH-trah PAH-rah dar FROO-toh"
+},
+{
+"cat": "gas",
+"topic": "stop",
+"es": "¿Venden hielo?",
+"en": "Do you sell ice?",
+"pr": "VEHN-dehn YEH-loh"
+},
+{
+"cat": "pharmacy",
+"topic": "symptoms",
+"kind": "hear",
+"es": "¿Desde cuándo?",
+"en": "Since when?",
+"pr": "DEHS-deh KWAHN-doh"
+},
+{
+"cat": "daily",
+"topic": "greet",
+"es": "¿Qué tal?",
+"en": "How's it going?",
+"pr": "keh TAHL"
+},
+{
+"cat": "garden",
+"topic": "soil",
+"es": "¿Tiene composta?",
+"en": "Do you have compost?",
+"pr": "tee-EH-neh kohm-POHS-tah"
+},
+{
+"cat": "doctor",
+"topic": "tests",
+"es": "¿Cuándo están los resultados?",
+"en": "When will the results be ready?",
+"pr": "KWAN-doh ehs-TAHN lohs rreh-sool-TAH-dohs"
+},
+{
+"cat": "police",
+"topic": "ticket",
+"kind": "hear",
+"es": "Le voy a recoger la licencia.",
+"en": "I'm going to hold your license.",
+"pr": "leh voy ah rreh-koh-HEHR lah lee-SEHN-see-ah",
+"note": "Officers may keep your license (or a plate) until the fine is paid. You get it back at the office."
+},
+{
+"cat": "clean",
+"topic": "laundry",
+"es": "La ropa blanca va aparte.",
+"en": "The whites go separately.",
+"pr": "lah ROH-pah BLAHN-kah vah ah-PAR-teh"
+},
+{
+"cat": "doctor",
+"topic": "treat",
+"es": "¿Me puede escribir el diagnóstico?",
+"en": "Can you write down the diagnosis?",
+"pr": "meh PWEH-deh ehs-kree-BEER ehl dee-ahg-NOHS-tee-koh",
+"note": "Worth asking for the diagnosis and doses in writing. It's easier to check later, or to translate."
+},
+{
+"cat": "pharmacy",
+"topic": "beach",
+"es": "Me quemé con el sol.",
+"en": "I got sunburned.",
+"pr": "meh keh-MEH kohn ehl sohl"
+},
+{
+"cat": "garden",
+"topic": "water",
+"kind": "hear",
+"es": "Cuando la tierra esté seca",
+"en": "When the soil is dry",
+"pr": "KWAHN-doh lah tee-EH-rrah ehs-TEH SEH-kah",
+"note": "Push a finger into the soil. If it's dry a couple of centimeters down, it's time."
+},
+{
+"cat": "police",
+"topic": "stop",
+"es": "¿Me lo repite más despacio, por favor?",
+"en": "Could you repeat that more slowly, please?",
+"pr": "meh loh rreh-PEE-teh mahs dehs-PAH-see-oh, por fah-VOR"
+},
+{
+"cat": "food",
+"topic": "order",
+"es": "¿De qué tiene?",
+"en": "What fillings do you have? (tacos, tamales…)",
+"pr": "deh KEH tee-EH-neh"
+},
+{
+"cat": "doctor",
+"topic": "pay",
+"es": "¿Me da un informe médico para mi seguro?",
+"en": "Can I have a medical report for my insurance?",
+"pr": "meh dah oon een-FOR-meh MEH-dee-koh PAH-rah mee seh-GOO-roh",
+"note": "Insurers usually want the diagnosis, the treatment, and the doctor's cédula (license number) on it."
+},
+{
+"cat": "bank",
+"topic": "atm",
+"es": "El cajero no me dio el dinero.",
+"en": "The ATM didn't give me the money.",
+"pr": "ehl kah-HEH-roh noh meh dee-OH ehl dee-NEH-roh"
+},
+{
+"cat": "clean",
+"topic": "careful",
+"es": "Dele de comer al gato, por favor.",
+"en": "Please feed the cat.",
+"pr": "DEH-leh deh koh-MEHR ahl GAH-toh, por fah-VOR"
+},
+{
+"cat": "house",
+"topic": "legal",
+"es": "Necesito un fideicomiso.",
+"en": "I need a bank trust.",
+"pr": "neh-seh-SEE-toh oon fee-deh-ee-KOH-mee-soh",
+"note": "Foreigners buy within 50 km of the coast through a bank trust (fideicomiso). All of the Riviera Maya is in this zone."
+},
+{
+"cat": "clean",
+"topic": "supplies",
+"kind": "hear",
+"es": "Necesito una jerga nueva.",
+"en": "I need a new floor cloth.",
+"pr": "neh-seh-SEE-toh OO-nah HEHR-gah NWEH-vah"
+},
+{
+"cat": "clean",
+"topic": "supplies",
+"es": "¿Qué productos necesita?",
+"en": "What supplies do you need?",
+"pr": "keh proh-DOOK-tohs neh-seh-SEE-tah"
+},
+{
+"cat": "store",
+"topic": "register",
+"kind": "hear",
+"es": "¿Redondea?",
+"en": "Would you like to round up? (to donate)",
+"pr": "reh-dohn-DEH-ah",
+"note": "Cashiers at OXXO and supermarkets ask this. \"No, gracias\" is perfectly fine."
+},
+{
+"cat": "taxi",
+"topic": "where",
+"es": "Es enfrente del Oxxo.",
+"en": "It's across from the Oxxo.",
+"pr": "ehs ehn-FREHN-teh dehl OHK-soh",
+"note": "Oxxo stores are the go-to landmarks for giving directions."
+},
+{
+"cat": "clean",
+"topic": "chat",
+"es": "¿Gusta un café o un vaso de agua?",
+"en": "Would you like a coffee or a glass of water?",
+"pr": "GOOS-tah oon kah-FEH oh oon VAH-soh deh AH-gwah",
+"note": "¿Gusta…? is a warm, polite Mexican way to offer something."
+},
+{
+"cat": "doctor",
+"topic": "treat",
+"kind": "hear",
+"es": "Necesita puntadas.",
+"en": "You need stitches.",
+"pr": "neh-seh-SEE-tah poon-TAH-dahs"
+},
+{
+"cat": "garden",
+"topic": "find",
+"es": "¿Tienen más grandes / más chicas?",
+"en": "Do you have bigger / smaller ones?",
+"pr": "tee-EH-nehn mahs GRAHN-dehs / mahs CHEE-kahs"
+},
+{
+"cat": "food",
+"topic": "drinks",
+"es": "Un agua natural",
+"en": "A still water",
+"pr": "oon AH-gwah nah-too-RAHL",
+"note": "\"Agua mineral\" is sparkling. \"Agua fresca\" is a fruit drink (jamaica, horchata, tamarindo)."
+},
+{
+"cat": "gas",
+"topic": "fill",
+"kind": "hear",
+"es": "¿Cuánto le cargo?",
+"en": "How much should I put in?",
+"pr": "KWAHN-toh leh KAR-goh"
+},
+{
+"cat": "repair",
+"topic": "water",
+"es": "Se acabó el gas.",
+"en": "The gas ran out.",
+"pr": "seh ah-kah-BOH ehl gahs"
+},
+{
+"cat": "garden",
+"topic": "size",
+"kind": "hear",
+"es": "Llega a medir dos metros",
+"en": "It gets up to two meters",
+"pr": "YEH-gah ah meh-DEER dohs MEH-trohs",
+"note": "1 metro ≈ 3.3 feet."
+},
+{
+"cat": "store",
+"topic": "errands",
+"es": "¿Tiene algo para…?",
+"en": "Do you have something for…? (pharmacy)",
+"pr": "tee-EH-neh AHL-goh PAH-rah",
+"note": "…el dolor de cabeza (headache), …la diarrea, …las quemaduras de sol (sunburn), …la tos (cough)"
+},
+{
+"cat": "house",
+"topic": "services",
+"es": "Quiero contratar la luz.",
+"en": "I want to set up electricity.",
+"pr": "kee-EH-roh kohn-trah-TAR lah loos"
+},
+{
+"cat": "food",
+"topic": "order",
+"es": "Para aquí",
+"en": "For here (dine in)",
+"pr": "PAH-rah ah-KEE"
+},
+{
+"cat": "store",
+"topic": "register",
+"kind": "hear",
+"es": "¿Algo más?",
+"en": "Anything else?",
+"pr": "AHL-goh MAHS",
+"note": "You'll hear this at every register."
+},
+{
+"cat": "daily",
+"topic": "greet",
+"es": "Hola",
+"en": "Hello",
+"pr": "OH-lah"
+},
+{
+"cat": "bank",
+"topic": "exchange",
+"es": "¿Dónde hay una casa de cambio?",
+"en": "Where's a currency exchange?",
+"pr": "DOHN-deh eye OO-nah KAH-sah deh KAHM-bee-oh"
+},
+{
+"cat": "house",
+"topic": "look",
+"es": "¿Cuánto piden?",
+"en": "What's the asking price?",
+"pr": "KWAN-toh PEE-dehn"
+},
+{
+"cat": "police",
+"topic": "ticket",
+"kind": "hear",
+"es": "¿Cómo le hacemos?",
+"en": "How are we going to handle this?",
+"pr": "KOH-moh leh ah-SEH-mohs",
+"note": "Often a hint at an on-the-spot cash payment (la mordida). Answering 'with the written ticket, please' is the safe reply."
+},
+{
+"cat": "store",
+"topic": "register",
+"es": "¿Me cobra, por favor?",
+"en": "Can you ring me up, please?",
+"pr": "meh KOH-brah, por fah-VOR"
+},
+{
+"cat": "clean",
+"topic": "tasks",
+"kind": "hear",
+"es": "¿Qué quiere que haga hoy?",
+"en": "What would you like me to do today?",
+"pr": "keh kee-EH-reh keh AH-gah oy"
+},
+{
+"cat": "daily",
+"topic": "directions",
+"es": "A la derecha / a la izquierda",
+"en": "To the right / to the left",
+"pr": "ah lah deh-REH-chah / ah lah ees-kee-EHR-dah"
+},
+{
+"cat": "food",
+"topic": "drinks",
+"es": "Otra, por favor",
+"en": "Another one, please",
+"pr": "OH-trah, por fah-VOR",
+"note": "Use \"otro\" for a masculine thing (otro café, otro taco)."
+},
+{
+"cat": "gas",
+"topic": "fill",
+"es": "Es un coche rentado.",
+"en": "It's a rental car.",
+"pr": "ehs oon KOH-cheh rehn-TAH-doh"
+},
+{
+"cat": "clean",
+"topic": "kitchen",
+"es": "Lave los trastes, por favor.",
+"en": "Please wash the dishes.",
+"pr": "LAH-veh lohs TRAHS-tehs, por fah-VOR",
+"note": "Trastes is the everyday Mexican word for dishes."
+},
+{
+"cat": "garden",
+"topic": "soil",
+"kind": "hear",
+"es": "Revuélvala con tezontle",
+"en": "Mix it with volcanic gravel",
+"pr": "reh-VWEHL-vah-lah kohn teh-SOHN-tleh"
+},
+{
+"cat": "gas",
+"topic": "road",
+"es": "¿Qué tan lejos está la siguiente?",
+"en": "How far is the next one?",
+"pr": "keh tahn LEH-hohs ehs-TAH lah see-gee-EHN-teh"
+},
+{
+"cat": "doctor",
+"topic": "exam",
+"kind": "hear",
+"es": "Quítese la camisa.",
+"en": "Take off your shirt.",
+"pr": "KEE-teh-seh lah kah-MEE-sah"
+},
+{
+"cat": "bank",
+"topic": "exchange",
+"es": "¿A cómo está el dólar?",
+"en": "What's the dollar rate?",
+"pr": "ah KOH-moh ehs-TAH ehl DOH-lar",
+"note": "The everyday way to ask for the exchange rate."
+},
+{
+"cat": "house",
+"topic": "finish",
+"es": "¿Tiene licencia de construcción?",
+"en": "Does it have a building permit?",
+"pr": "tee-EH-neh lee-SEHN-see-ah deh kohns-trook-see-OHN"
+}
+]

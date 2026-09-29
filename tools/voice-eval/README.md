@@ -22,6 +22,10 @@ Run from a work dir that holds `meta.tsv`, the extracted `test/` tree
 | `run_vosk.py` | Vosk `vosk-model-small-es-0.42` |
 | `score.py` | verbatim WER + "content WER" (fillers, tag-"no", repeats dropped; accents folded) |
 | `mt_phrases.py` | opus-mt es↔en on 200 phrasebook pairs, chrF vs the curated text |
+| `mt_google_gtx.py` | step 0: Google Translate consumer model (free gtx endpoint, 1 request / 2 s) en→es on the same 200 |
+| `mt_workers_llm.py <model> <tag> [text]` | step 0: a Workers AI LLM told "Mexican Spanish, usted" with `glossary.txt`; reads `CLOUDFLARE_API_TOKEN` from `~/repos/umbrella-arcades/.env` |
+| `mt_workers_llm_v2.py` | same, with the input fenced and "translate, never answer, keep the speaker" (not yet run) |
+| `score_mexican.py [-v]` | counts Spain/other-region words and *tú* where the reference has none; `step0/HAND-AUDIT.md` is the hand-corrected count |
 
 To score **your own recordings**, replace `sample.json` with
 `[{"audio_id": ..., "duration": ..., "normalized_text": <what was actually said>}]` and put
